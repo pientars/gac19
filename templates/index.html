@@ -1,19 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
 <head>
   <meta charset="utf-8">
   <style> /* set the CSS */
     body {
       font: 15px "Open Sans", sans-serif;
-      background-color: #403B3B;
+      background-color: #241C15;
     }
     path {
       stroke-width: 2;
       fill: none;
     }
+    .header-div {
+      display: flex;
+      align-items:center;
+    }
+    .plot-container {
+      display: inline;
+    }
     .axis-text {
+      font: 14px "Open Sans", sans-serif;
       fill: #DBD9D2;
-      font-size: 14px;
+    }
+    .title {
+      display:inline;
+      font: 29px "Open Sans", sans-serif;
+      font-weight: 700;
+      color: #E7B75F;
+      margin-left: 10px;
     }
     .title-text {
       fill: #F6F6F4;
@@ -26,12 +41,17 @@
       fill: #DBD9D2;
     }
 
-  </style>
 
+  </style>
 
 </head>
 <body>
-  <h3> Georgia Coronavirus Tracking </h3>
+<div class="header-div">
+  <img style="vertical-align:middle" src="{{url_for('static', filename='ga.png')}}">
+  <span class="title"> Dirty South Rona Stats </span>
+</div>
+
+
 <div id='my_dataviz'></div>
 
 <script src="http://d3js.org/d3.v4.min.js"></script>
@@ -47,19 +67,23 @@ var margin = {top: 20, right:100, bottom: 40, left: 60},
     width = 1060 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-// append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+
 
 
 let colors = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c'];
 
-function draw_pos_neg_tested_plot(title){
+function draw_series_plot(series){
+  // append the svg object to the body of the page
+  var svg = d3.select("#my_dataviz")
+    .append("div")
+      .attr("class", "plot-container")
+    .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
   // format time scale with dates
   var x = d3.scaleTime()
     .domain(d3.extent(vis_data, function(d) { return d.date; }))
@@ -72,7 +96,7 @@ function draw_pos_neg_tested_plot(title){
     .attr("y", 0)
     .attr("text-anchor", "middle")
     .style("font-size", "16px")
-    .text(title);
+    .text(series.title);
 
   // x axis
   svg.append("g")
@@ -86,9 +110,11 @@ function draw_pos_neg_tested_plot(title){
       .attr("dy", ".15em")
       .attr("transform", "rotate(-35)");
 
-  let y_max = Math.max(d3.max(vis_data, function(d) { return +d.positive; }),
-                       d3.max(vis_data, function(d) { return +d.negative; }),
-                       d3.max(vis_data, function(d) { return +d.totalTestResults; }))
+  // Get max across all series, ooof ugly
+  let y_max = Math.max(...series.series.map(function(ser) {
+    return d3.max(vis_data, function(d) { return +d[ser.vals_key]; })
+  }));
+
   // Add Y axis
   var y = d3.scaleLinear()
     .domain([0, y_max])
@@ -99,103 +125,58 @@ function draw_pos_neg_tested_plot(title){
     .selectAll("text")
       .attr("class", "axis-text");
 
-  // positives line
-  svg.append("path")
-    .datum(vis_data)
-    .attr("fill", "none")
-    .attr("stroke", colors[0])
-    .attr("stroke-width", 1.5)
-    .attr("d", d3.line()
-      .x(function(d) { return x(d.date) })
-      .y(function(d) { return y(d.positive)  }) )
-  // positives text
-  svg.append("text")
-  	.attr("transform", "translate(" + (width+5) + "," + y(vis_data[0].positive) + ")")
-    .attr("alignment-baseline","middle")
-    .attr("fill", colors[0])
-    .text("Positive")
-
-  // negatives
-  svg.append("path")
-    .datum(vis_data)
-    .attr("fill", "none")
-    .attr("stroke", colors[1])
-    .attr("stroke-width", 1.5)
-    .attr("d", d3.line()
-      .x(function(d) { return x(d.date) })
-      .y(function(d) { return y(d.negative) }) )
-  // positives text
-  svg.append("text")
-  	.attr("transform", "translate(" + (width+5) + "," + y(vis_data[0].negative) + ")")
-    .attr("alignment-baseline","middle")
-    .attr("fill", colors[1])
-    .text("Negative")
-
-  // death
-  svg.append("path")
-    .datum(vis_data)
-    .attr("fill", "none")
-    .attr("stroke", colors[2])
-    .attr("stroke-width", 1.5)
-    .attr("d", d3.line()
-      .x(function(d) { return x(d.date) })
-      .y(function(d) { return y(d.totalTestResults) }) )
-  // positives text
-  svg.append("text")
-  	.attr("transform", "translate(" + (width+5) + "," + y(vis_data[0].totalTestResults) + ")")
-    .attr("alignment-baseline","middle")
-    .attr("fill", colors[2])
-    .text("Tested")
-
-
   // Legendo
   let legend_pos = [20, 20];
   let legend_y_off = 20;
   var legend = svg.append("g").attr("class", "legend")
-  legend.append("circle")
-    .attr("cx", legend_pos[0])
-    .attr("cy",legend_pos[1]-2)
-    .attr("r", 6)
-    .style("fill", colors[0])
-  legend.append("circle")
-    .attr("cx", legend_pos[0])
-    .attr("cy",legend_pos[1]+legend_y_off-1)
-    .attr("r", 6)
-    .style("fill", colors[1])
-  legend.append("circle")
-    .attr("cx", legend_pos[0])
-    .attr("cy",legend_pos[1]+legend_y_off*2-1)
-    .attr("r", 6)
-    .style("fill", colors[2])
-  legend.append("text")
-    .attr("x", legend_pos[0]+15)
-    .attr("y",legend_pos[1])
-    .attr("alignment-baseline","middle")
-    .text("Positive Cases")
-  legend.append("text")
-    .attr("x", legend_pos[0]+15)
-    .attr("y",legend_pos[1]+legend_y_off)
-    .style("font-size", "15px")
-    .attr("alignment-baseline","middle")
-    .text("Negative Cases")
-  legend.append("text")
-    .attr("x", legend_pos[0]+15)
-    .attr("y",legend_pos[1]+legend_y_off*2)
-    .style("font-size", "15px")
-    .attr("alignment-baseline","middle")
-    .text("Tested")
+
+  series.series.forEach( function (ser, i) {
+    // positives line
+    svg.append("path")
+      .datum(vis_data)
+      .attr("fill", "none")
+      .attr("stroke", colors[i])
+      .attr("stroke-width", 1.5)
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.date) })
+        .y(function(d) { return y(d[ser.vals_key])  }) )
+    // positives text
+    svg.append("text")
+    	.attr("transform", "translate(" + (width+5) + "," + y(vis_data[0][ser.vals_key]) + ")")
+      .attr("alignment-baseline","middle")
+      .attr("fill", colors[i])
+      .text(ser.name)
+
+    // legend dot, text
+    legend.append("circle")
+      .attr("cx", legend_pos[0])
+      .attr("cy",legend_pos[1]+legend_y_off*i-2)
+      .attr("r", 6)
+      .style("fill", colors[i])
+    legend.append("text")
+      .attr("x", legend_pos[0]+15)
+      .attr("y",legend_pos[1]+legend_y_off*i)
+      .attr("alignment-baseline","middle")
+      .text(ser.desc)
+  })
 }
 
-function draw_us_vs_ga_plot() {
-
-}
-
-draw_us_vs_ga_plot();
 
 
-draw_pos_neg_tested_plot('GA Positive, Negative, Tested');
+full_series = [ {'title': 'GA: Positive, Negative, Tested',
+                 'series':[{'name':'Positive', vals_key:'positive', 'desc':'Positive Cases'},
+                          {'name':'Negative', vals_key:'negative', 'desc':'Negative Cases'},
+                          {'name':'Tested', vals_key:'totalTestResults', 'desc':'People Tested'}]},
+                {'title': 'US Positive, GA Positive ',
+                 'series':[{'name':'US Positive', vals_key:'positive_us', 'desc':'Positive Cases (US)'},
+                           {'name':'GA Positive', vals_key:'positive', 'desc':'Negative Cases (GA)'}]},
+                {'title': 'GA: Positive, Death ',
+                 'series':[{'name':'Positive', vals_key:'positive', 'desc':'Positive Cases'},
+                           {'name':'Death', vals_key:'death', 'desc':'Deaths'}]},
 
+];
 
+full_series.forEach(function(ser) { draw_series_plot(ser) });
 
 
 </script>
