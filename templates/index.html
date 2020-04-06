@@ -32,7 +32,7 @@
     }
     .title-text {
       fill: #F6F6F4;
-      font-size: 24px;
+      font-size: 20px;
     }
     .axis-light line, .axis-light path{
       stroke: #8C8C8C;
@@ -54,7 +54,7 @@
 
 <div id='my_dataviz'></div>
 
-<script src="http://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
 var vis_data = JSON.parse('{{ vis_data | safe }}');
 // Turn date strings into dates
@@ -64,9 +64,8 @@ vis_data.forEach( function(d, i){
 
 // set the dimensions and margins of the graph
 var margin = {top: 20, right:100, bottom: 40, left: 60},
-    width = 1060 - margin.left - margin.right,
+    width = 900 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
-
 
 
 
@@ -92,10 +91,9 @@ function draw_series_plot(series){
   // title
   svg.append("text")
     .attr("class", "title-text")
-    .attr("x", 115)
+    .attr("x", 12)
     .attr("y", 0)
-    .attr("text-anchor", "middle")
-    .style("font-size", "16px")
+    .attr("text-anchor", "left")
     .text(series.title);
 
   // x axis
@@ -173,6 +171,9 @@ full_series = [ {'title': 'GA: Positive, Negative, Tested',
                 {'title': 'GA: Positive, Death ',
                  'series':[{'name':'Positive', vals_key:'positive', 'desc':'Positive Cases'},
                            {'name':'Death', vals_key:'death', 'desc':'Deaths'}]},
+                {'title': 'Change in Daily Positive Cases US vs GA ',
+                 'series':[{'name':'dPos/dt (US)', vals_key:'positive_diff_us', 'desc':'Daily change in US positive cases'},
+                           {'name':'dPos/dt (GA)', vals_key:'positive_diff', 'desc':'Daily change in GA positive cases'}]},
 
 ];
 
