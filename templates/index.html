@@ -3,7 +3,11 @@
 <head>
   <meta charset="utf-8">
   <style> /* set the CSS */
-    body { font: 12px Arial;}
+    body {
+      font: 12px Arial;
+      background-color: #403B3B;
+    }
+
     path {
       stroke-width: 2;
       fill: none;
@@ -25,12 +29,13 @@
 <body>
 <div id='my_dataviz'></div>
 
-<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/d3.v4.min.js"></script>
 <script>
+  var vis_data = JSON.parse('{{ vis_data | safe }}');
 
   // set the dimensions and margins of the graph
   var margin = {top: 10, right: 30, bottom: 30, left: 60},
-      width = 460 - margin.left - margin.right,
+      width = 1060 - margin.left - margin.right,
       height = 400 - margin.top - margin.bottom;
 
   // append the svg object to the body of the page
@@ -42,47 +47,64 @@
       .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-  //Read the data
-  d3.json("",
 
-    // Turn date strings into dates
-    function(d){
+function draw_plot(title,){
+
+  // Turn date strings into dates
+  vis_data.forEach( function(d, i){
       console.log(d);
-      return { date : d3.timeParse("%Y%m%d")(d.date), value : d.value }
-    },
+      d.date = d3.timeParse("%Y%m%d")(d.date);
+      // return { date : d3.timeParse("%Y%m%d")(d.date), value : d.value }
+  });
 
-    // Now I can use this dataset:
-    function(data) {
+  console.log(vis_data)
 
-      // Add X axis --> it is a date format
-      var x = d3.scaleTime()
-        .domain(d3.extent(data, function(d) { return d.date; }))
-        .range([ 0, width ]);
-      svg.append("g")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x));
+  // Add X axis --> it is a date format
+  var x = d3.scaleTime()
+    .domain(d3.extent(vis_data, function(d) { return d.date; }))
+    .range([ 0, width ]);
 
-      // Add Y axis
-      var y = d3.scaleLinear()
-        .domain([0, d3.max(data, function(d) { return +d.value; })])
-        .range([ height, 0 ]);
-      svg.append("g")
-        .call(d3.axisLeft(y));
+  svg.append("text")
+        .attr("x", (width / 2))
+        .attr("y", 0)
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .text(title);
 
-      // Add the line
-      svg.append("path")
-        .datum(data)
-        .attr("fill", "none")
-        .attr("stroke", "steelblue")
-        .attr("stroke-width", 1.5)
-        .attr("d", d3.line()
-          .x(function(d) { return x(d.date) })
-          .y(function(d) { return y(d.value) })
-          )
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x)
+      .tickFormat(d3.timeFormat("%m-%d")));
 
-  })
+  // Add Y axis
+  var y = d3.scaleLinear()
+    .domain([0, d3.max(vis_data, function(d) { return +d.positive; })])
+    .range([ height, 0 ]);
+  svg.append("g")
+    .call(d3.axisLeft(y));
 
-draw(graphData);
+  // Add positive
+  svg.append("path")
+    .datum(vis_data)
+    .attr("fill", "none")
+    .attr("stroke", "steelblue")
+    .attr("stroke-width", 1.5)
+    .attr("d", d3.line()
+      .x(function(d) { return x(d.date) })
+      .y(function(d) { return y(d.positive) }) )
+
+  // Add the line
+  svg.append("path")
+    .datum(vis_data)
+    .attr("fill", "none")
+    .attr("stroke", "red")
+    .attr("stroke-width", 1.5)
+    .attr("d", d3.line()
+      .x(function(d) { return x(d.date) })
+      .y(function(d) { return y(d.negative) }) )
+}
+
+draw_plot();
 
 </script>
 </body>
