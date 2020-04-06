@@ -16,7 +16,7 @@ def index():
   daily_cache_file = 'gac19_' + date +'.json'
 
   if not isfile(daily_cache_file):
-    url_states = "https://covidtracking.com/api/v1/states/daily.json?state=GA"
+    url_states = "https://covidtracking.com/api/v1/states/daily.json"
     r_states = requests.get(url = url_states)
     # url_us = "https://covidtracking.com/api/v1/us/daily.json"
     # r_us = requests.get(url = url_us)
