@@ -7,11 +7,11 @@ import pandas as pd
 from pandas.io.json import json_normalize
 import requests
 
+
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-
 
   date = str(dt.date.today())
   daily_cache_file = 'gac19_' + date +'.json'
@@ -23,8 +23,12 @@ def index():
     r_us = requests.get(url = url_us)
     filter_data(r_states.json(), r_us.json(), daily_cache_file)
 
-  vis_data = open(daily_cache_file, 'r').readlines();
-  return render_template("index.html", vis_data=vis_data[0])
+  vis_data = open(daily_cache_file, 'r').readlines()
+
+  topo_json, county_df = load_county_data()
+  return render_template("index.html",
+                         vis_data=vis_data[0],
+                         topo_json=topo_json)
 
 
 
@@ -61,7 +65,15 @@ def filter_data(state_data, us_data, daily_cache_file ):
   # Cache file
   merged_df.to_json(daily_cache_file, orient='records');
 
+def load_county_data():
+  county_df = pd.read_csv('data/ga_county_data.csv')
+  # print(county_df)
+  # topo_json = json.load(open('data/counties-albers-10m.json'))
+  topo_json = json.load(open('data/counties-10m.json'))
+  # topo_json = json.load(open('data/raw_us.json'))
+  # print(topo_json['objects'])
 
+  return topo_json, county_df
 
 
 
