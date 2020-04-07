@@ -8,10 +8,6 @@
       font: 15px "Open Sans", sans-serif;
       background-color: #241C15;
     }
-    path {
-      stroke-width: 2;
-      fill: none;
-    }
     .header-div {
       display: flex;
       align-items:center;
@@ -40,8 +36,6 @@
     .legend {
       fill: #DBD9D2;
     }
-
-
   </style>
 
 </head>
@@ -53,10 +47,14 @@
 
 
 <div id='my_dataviz'></div>
-
-<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/topojson.v3.min.js"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
 <script>
 var vis_data = JSON.parse('{{ vis_data | safe }}');
+var topo_json =  JSON.parse('{{ topo_json | tojson }}');
+
+console.log(topo_json);
+
 // Turn date strings into dates
 vis_data.forEach( function(d, i){
     d.date = d3.timeParse("%Y%m%d")(d.date);
@@ -159,8 +157,6 @@ function draw_series_plot(series){
   })
 }
 
-
-
 full_series = [ {'title': 'GA: Positive, Negative, Tested',
                  'series':[{'name':'Positive', vals_key:'positive', 'desc':'Positive Cases'},
                           {'name':'Negative', vals_key:'negative', 'desc':'Negative Cases'},
@@ -174,10 +170,123 @@ full_series = [ {'title': 'GA: Positive, Negative, Tested',
                 {'title': 'Change in Daily Positive Cases US vs GA ',
                  'series':[{'name':'dPos/dt (US)', vals_key:'positive_diff_us', 'desc':'Daily change in US positive cases'},
                            {'name':'dPos/dt (GA)', vals_key:'positive_diff', 'desc':'Daily change in GA positive cases'}]},
-
 ];
-
 full_series.forEach(function(ser) { draw_series_plot(ser) });
+
+
+
+function draw_counties1(us, state_prefix) {
+  var map_width = 960,
+      map_height = 600;
+
+  var svg = d3.select("#my_dataviz")
+    .append("div")
+      .attr("class", "plot-container")
+    .append("svg")
+      .attr("width", map_width + margin.left + margin.right)
+      .attr("height", map_height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+  var color = d3.scaleThreshold()
+      .domain(d3.range(2, 10))
+      .range(d3.schemeBlues[9]);
+
+  var quantize = d3.scaleQuantize()
+      .domain([0, .15])
+      .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
+
+
+  var counties = topojson.feature(us, us.objects.counties),
+      state = counties.features.filter(function(d) { return String(d.id).startsWith(state_prefix); })[0];
+
+  var projection = d3.geoAlbers();
+
+  var path = d3.geoPath()
+      .projection(projection);
+
+  // var states = topojson.feature(us, us.objects.states),
+      // state = states.features.filter(function(d) { return d.id === 34; })[0];
+
+  projection
+      .scale(1)
+      .translate([0, 0]);
+
+  var b = path.bounds(state),
+      s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
+      t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
+
+  // projection
+  //     .scale(s)
+  //     .translate(t);
+
+  // Filter just to ga
+  // var ga_only = us.objects.counties.geometries.filter(function (d) { return String(d.id).startsWith(state_prefix)})
+  // us.objects.counties.geometries = ga_only;
+
+  svg.append("g")
+     .attr("class", "counties")
+   .selectAll("path")
+   .data(counties)
+   .enter().append("path")
+     .attr("fill", function(d) { return '#33333' })
+     .attr("d", path)
+   .append("title")
+     .text(function(d) { return 5 + "%"; });
+
+ svg.append("path")
+     .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+     .attr("class", "states")
+     .attr("d", path);
+
+}
+
+function draw_counties(us, state_prefix) {
+  var width = 900,
+    height = 800;
+
+  projection = d3.geoAlbersUsa().scale(9000).translate([-1150,-400])
+
+  var path = d3.geoPath()
+      .projection(projection);
+
+  var svg = d3.select("#my_dataviz")
+    .append("div")
+      .attr("class", "plot-container")
+    .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+
+  // Counties...
+  svg.append("g")
+    .selectAll("path")
+    .data(topojson.feature(us, us.objects.counties).features)
+      .join("path")
+      .attr("fill", d => d.id.startsWith('13') ? "#DBD9D2": "#403B3B")
+      .attr("d", path);
+
+  // black county lines
+  svg.append("path")
+    .datum(topojson.mesh(us, us.objects.counties, (a, b) => a !== b))
+    .attr("fill", "none")
+    .attr("stroke", "#241C15")
+    .attr("stroke-linejoin", "round")
+    .attr("d", path);
+
+  // white lines
+  svg.append("path")
+    .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
+    .attr("fill", "none")
+    .attr("stroke-width", "2px")
+    .attr("stroke", "white")
+    .attr("stroke-linejoin", "round")
+    .attr("d", path);
+}
+
+let state_prefix = '13'
+draw_counties(topo_json, state_prefix);
+
 
 
 </script>
