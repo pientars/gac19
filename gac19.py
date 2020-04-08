@@ -68,6 +68,7 @@ def filter_data(state_data, us_data, daily_cache_file ):
   merged_df['positive_us_pop_norm'] = merged_df['positive_us'].map(lambda x: x/us_pop)
   merged_df['positive_ga_pop_norm'] = merged_df['positive_us'].map(lambda x: x/ga_pop)
 
+  # merged_df.fillna(0.000001, inplace=True)
 
   # Cache file
   merged_df.to_json(daily_cache_file, orient='records');

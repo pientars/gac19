@@ -68,7 +68,8 @@
 var vis_data = JSON.parse('{{ vis_data | safe }}');
 var topo_json =  JSON.parse('{{ topo_json | tojson }}');
 
-console.log(topo_json);
+console.log(vis_data);
+// console.log(topo_json);
 
 // Turn date strings into dates
 vis_data.forEach( function(d, i){
@@ -95,6 +96,10 @@ function draw_series_plot(series){
     .append("g")
       .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
+
+  // find the start date
+  // find_first_nonzero_date(vis_data, series);
+  // console.log(series);
 
   // title
   svg.append("text")
@@ -136,53 +141,55 @@ function draw_series_plot(series){
     .range([ height-margin.top, 0 ]);
 
   var y_axis = d3.axisLeft()
-    .scale(y_scale) ;
+    .scale(y_scale);
 
   var y_axis_g = svg.append("g")
     .attr("class", "axis-light y")
     .call(y_axis)
 
-    y_axis_g.selectAll("text")
-      .attr("class", "axis-text-vert");
+  y_axis_g.selectAll("text")
+    .attr("class", "axis-text-vert");
 
-    y_axis_g.on("click", function() {
-      if (series.log_y) {
-        y_scale = d3.scaleLinear()
-          .domain([0, y_max])
-          .range([ height-margin.top, 0 ]);
-        series.log_y = false;
-      } else {
-        y_scale = d3.scaleLog()
-          .domain([1e-6, y_max])
-          .range([ height-margin.top, 1 ]);
-        series.log_y = true;
-      }
+  y_axis_g.on("click", function() {
+    if (series.log_y) {
+      y_scale = d3.scaleLinear()
+        .domain([0, y_max])
+        .range([ height-margin.top, 0 ]);
+      series.log_y = false;
+    } else {
+      y_scale = d3.scaleLog()
+        .domain([1, y_max])
+        .range([ height-margin.top, 1 ])
+      series.log_y = true;
+    }
 
-      // Reset scale
-      y_axis.scale(y_scale);
-      y_axis_g
-       	.transition()
+    // Reset scale
+    y_axis.scale(y_scale)
+      .ticks(6, "~s")
+    y_axis_g
+     	.transition()
+        .duration(500)
+     	.call(y_axis)
+      .selectAll("text")
+        .attr("class", "axis-text");
+
+    // Redraw our series
+    series.series.forEach( function (ser, i) {
+      // positives line
+      svg.selectAll(".line"+i)
+        .transition()
           .duration(500)
-       	.call(y_axis)
-        .selectAll("text")
-          .attr("class", "axis-text");
-
-      // Redraw our series
-      series.series.forEach( function (ser, i) {
-        // positives line
-        svg.selectAll(".line"+i)
-          .transition()
-            .duration(500)
-          .attr("d", d3.line()
-            .x(function(d) { return x_scale(d.date) })
-            .y(function(d) { return y_scale(d[ser.vals_key])  }) )
-        // positives text
-        svg.selectAll(".ptext"+i)
-          .transition()
-            .duration(500)
-          .attr("transform", "translate(" + (width+5) + "," + y_scale(vis_data[0][ser.vals_key]) + ")")
-      });
+        .attr("d", d3.line()
+          .defined(function (d) { return d[ser.vals_key]; })
+          .x(function(d) { return x_scale(d.date) })
+          .y(function(d) { return y_scale(d[ser.vals_key])  }) )
+      // positives text
+      svg.selectAll(".ptext"+i)
+        .transition()
+          .duration(500)
+        .attr("transform", "translate(" + (width+5) + "," + y_scale(vis_data[0][ser.vals_key]) + ")")
     });
+  });
 
 
   // Legendo
@@ -244,6 +251,12 @@ full_series = [ {'title': 'GA: Positive, Negative, Tested',
 ];
 full_series.forEach(function(ser) { draw_series_plot(ser) });
 
+function find_first_nonzero_date(vis_data, series){
+    series.series.forEach( function (ser, i) {
+      var index = vis_data.findIndex(val => val[ser.vals_key] < 1)
+      ser['nonzero_date'] = index;
+    })
+}
 
 
 function draw_counties1(us, state_prefix) {
