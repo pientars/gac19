@@ -50,8 +50,9 @@ def filter_data(state_data, us_data, daily_cache_file ):
                        'hospitalized':'hospitalized_us',
                        'death':'death_us' },
                       inplace=True)
-
   merged_df = us_df_subset.merge(ga_df_subset, on='date')
+
+  # Calculate differences
   us_positive_diff = np.zeros(merged_df.shape[0],)
   ga_positive_diff = np.zeros(merged_df.shape[0],)
   # We will be off by one in length, skip that last one.
@@ -60,7 +61,13 @@ def filter_data(state_data, us_data, daily_cache_file ):
   merged_df['positive_diff_us'] = us_positive_diff
   merged_df['positive_diff'] = ga_positive_diff
 
-  # print(merged_df)
+
+  # Calculate normalized
+  us_pop = 331.002651
+  ga_pop = 10.617423
+  merged_df['positive_us_pop_norm'] = merged_df['positive_us'].map(lambda x: x/us_pop)
+  merged_df['positive_ga_pop_norm'] = merged_df['positive_us'].map(lambda x: x/ga_pop)
+
 
   # Cache file
   merged_df.to_json(daily_cache_file, orient='records');
