@@ -23,11 +23,10 @@ def index():
     r_us = requests.get(url = url_us)
     filter_data(r_states.json(), r_us.json(), daily_cache_file)
 
-  vis_data = open(daily_cache_file, 'r').readlines()
-
+  vis_data = json.load(open(daily_cache_file, 'r'))
   topo_json, county_df = load_county_data()
   return render_template("index.html",
-                         vis_data=vis_data[0],
+                         vis_data=vis_data,
                          topo_json=topo_json)
 
 
@@ -63,15 +62,33 @@ def filter_data(state_data, us_data, daily_cache_file ):
 
 
   # Calculate normalized
-  us_pop = 331.002651
-  ga_pop = 10.617423
-  merged_df['positive_us_pop_norm'] = merged_df['positive_us'].map(lambda x: x/us_pop)
-  merged_df['positive_ga_pop_norm'] = merged_df['positive_us'].map(lambda x: x/ga_pop)
+  # us_pop = 331.002651
+  # ga_pop = 10.617423
+  # merged_df['positive_us_pop_norm'] = merged_df['positive_us'].map(lambda x: x/us_pop)
+  # merged_df['positive_ga_pop_norm'] = merged_df['positive_us'].map(lambda x: x/ga_pop)
+  merged_df.fillna('NaN', inplace=True)
 
-  # merged_df.fillna(0.000001, inplace=True)
+  final_data = {'us':[], 'ga':[]}
+  for index, row in merged_df.iterrows():
+    final_data['us'].append({'date':int(row['date']),
+                             'positive':row['positive_us'],
+                             'negative':row['negative_us'],
+                             'tested':row['totalTestResults_us'],
+                             'hospitalized':row['hospitalized_us'],
+                             'death':row['death_us'],
+                             'positive_diff':row['positive_diff_us']})
+
+    final_data['ga'].append({'date':int(row['date']),
+                             'positive':row['positive'],
+                             'negative':row['negative'],
+                             'tested':row['totalTestResults'],
+                             'hospitalized':row['hospitalized'],
+                             'death':row['death'],
+                             'positive_diff':row['positive_diff']})
+
 
   # Cache file
-  merged_df.to_json(daily_cache_file, orient='records');
+  json.dump(final_data, open(daily_cache_file, 'w'))
 
 def load_county_data():
   county_df = pd.read_csv('data/ga_county_data.csv')

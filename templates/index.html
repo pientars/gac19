@@ -65,23 +65,33 @@
 <script src="https://d3js.org/topojson.v3.min.js"></script>
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script>
-var vis_data = JSON.parse('{{ vis_data | safe }}');
+var vis_data =  JSON.parse('{{ vis_data | tojson }}');
 var topo_json =  JSON.parse('{{ topo_json | tojson }}');
+
+locations = ['us', 'ga'];
+
+// Turn date strings into dates
+locations.forEach( function(location, i){
+  vis_data[location].forEach( function(d, i){
+    Object.keys(d).forEach(function(key) {
+      if (key == 'date'){
+        d.date = d3.timeParse("%Y%m%d")(d.date);
+      } else {
+        // This is done to convert NaN's from a str to JS numeric NaN
+        d[key] = +d[key]
+      }
+    });
+  });
+});
 
 console.log(vis_data);
 // console.log(topo_json);
 
-// Turn date strings into dates
-vis_data.forEach( function(d, i){
-    d.date = d3.timeParse("%Y%m%d")(d.date);
-});
 
 // set the dimensions and margins of the graph
 var margin = {top: 20, right:100, bottom: 40, left: 60},
     width = 900 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
-
-
 
 let colors = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c'];
 
@@ -109,9 +119,9 @@ function draw_series_plot(series){
     .attr("text-anchor", "left")
     .text(series.title);
 
-  // x format time scale with dates
+  // x format time scale with dates from US which has the earliest cases overall
   var x_scale = d3.scaleTime()
-    .domain(d3.extent(vis_data, function(d) { return d.date; }))
+    .domain(d3.extent(vis_data['us'], function(d) { return d.date; }))
     .range([ 0, width ]);
 
   // x axis
@@ -129,10 +139,9 @@ function draw_series_plot(series){
       .attr("dy", ".15em")
       .attr("transform", "rotate(-35)");
 
-
   // Y values Get max across all series, ooof ugly
   let y_max = Math.max(...series.series.map(function(ser) {
-    return d3.max(vis_data, function(d) { return +d[ser.vals_key]; })
+    return  d3.max( vis_data[ser.location], (d) => isNaN(d[ser.vals_key]) ? -1 : +d[ser.vals_key] );
   }));
 
   // Add Y axis
@@ -141,7 +150,8 @@ function draw_series_plot(series){
     .range([ height-margin.top, 0 ]);
 
   var y_axis = d3.axisLeft()
-    .scale(y_scale);
+    .scale(y_scale)
+    .ticks(10, "~s");
 
   var y_axis_g = svg.append("g")
     .attr("class", "axis-light y")
@@ -180,17 +190,16 @@ function draw_series_plot(series){
         .transition()
           .duration(500)
         .attr("d", d3.line()
-          .defined(function (d) { return d[ser.vals_key]; })
+          .defined(d => !isNaN(d[ser.vals_key]) && d[ser.vals_key] > 0)
           .x(function(d) { return x_scale(d.date) })
           .y(function(d) { return y_scale(d[ser.vals_key])  }) )
       // positives text
       svg.selectAll(".ptext"+i)
         .transition()
           .duration(500)
-        .attr("transform", "translate(" + (width+5) + "," + y_scale(vis_data[0][ser.vals_key]) + ")")
+        .attr("transform", "translate(" + (width+5) + "," + y_scale(vis_data[ser['location']][0][ser.vals_key]) + ")")
     });
   });
-
 
   // Legendo
   let legend_pos = [20, 20];
@@ -201,17 +210,19 @@ function draw_series_plot(series){
     // positives line
     svg.append("path")
       .attr("class", "plot-line line"+i)
-      .datum(vis_data)
+      .datum(vis_data[ser['location']])
       .attr("fill", "none")
       .attr("stroke", colors[i])
       .attr("stroke-width", 1.5)
       .attr("d", d3.line()
-        .x(function(d) { return x_scale(d.date) })
-        .y(function(d) { return y_scale(d[ser.vals_key])  }) )
+        .defined(d => !isNaN(d[ser.vals_key]) && d[ser.vals_key] > 0  )
+          .x(function(d) { return x_scale(d.date) })
+          .y(function(d) { return y_scale(d[ser.vals_key])  }) )
+
     // positives text
     svg.append("text")
       .attr("class", "plot-text ptext"+i)
-    	.attr("transform", "translate(" + (width+5) + "," + y_scale(vis_data[0][ser.vals_key]) + ")")
+    	.attr("transform", "translate(" + (width+5) + "," + y_scale(vis_data[ser['location']][0][ser.vals_key]) + ")")
       .attr("alignment-baseline","middle")
       .attr("fill", colors[i])
       .text(ser.name)
@@ -227,30 +238,125 @@ function draw_series_plot(series){
       .attr("y",legend_pos[1]+legend_y_off*i)
       .attr("alignment-baseline","middle")
       .text(ser.desc)
-  })
+  });
+
+  // Mouse hover lines and events
+  // mouse_hover(svg);
 }
 
 
 full_series = [ {'title': 'GA: Positive, Negative, Tested',
                  'log_y':false,
-                 'series':[{'name':'Positive', vals_key:'positive', 'desc':'Positive Cases'},
-                          {'name':'Negative', vals_key:'negative', 'desc':'Negative Cases'},
-                          {'name':'Tested', vals_key:'totalTestResults', 'desc':'People Tested'}]},
+                 'series':[{'name':'Positive', location:'ga', vals_key:'positive', 'desc':'Positive Cases'},
+                          {'name':'Negative', location:'ga', vals_key:'negative', 'desc':'Negative Cases'},
+                          {'name':'Tested', location:'ga', vals_key:'tested', 'desc':'People Tested'}]},
+// ]
                 {'title': 'US Positive, GA Positive ',
                 'log_y':false,
-                 'series':[{'name':'US Positive', vals_key:'positive_us', 'desc':'Positive Cases (US)'},
-                           {'name':'GA Positive', vals_key:'positive', 'desc':'Negative Cases (GA)'}]},
+                 'series':[{'name':'US Positive', location:'us', vals_key:'positive', 'desc':'Positive Cases (US)'},
+                           {'name':'GA Positive', location:'ga', vals_key:'positive', 'desc':'Negative Cases (GA)'}]},
                 {'title': 'GA: Positive, Death ',
                 'log_y':false,
-                 'series':[{'name':'Positive', vals_key:'positive', 'desc':'Positive Cases'},
-                           {'name':'Death', vals_key:'death', 'desc':'Deaths'}]},
+                 'series':[{'name':'Positive', location:'ga', vals_key:'positive', 'desc':'Positive Cases'},
+                           {'name':'Death', location:'ga', vals_key:'death', 'desc':'Deaths'}]},
                 {'title': 'Change in Daily Positive Cases US vs GA ',
                 'log_y':false,
-                 'series':[{'name':'dPos/dt (US)', vals_key:'positive_diff_us', 'desc':'Daily change in US positive cases'},
-                           {'name':'dPos/dt (GA)', vals_key:'positive_diff', 'desc':'Daily change in GA positive cases'}]},
+                 'series':[{'name':'dPos/dt (US)', location:'us', vals_key:'positive_diff', 'desc':'Daily change in US positive cases'},
+                           {'name':'dPos/dt (GA)', location:'ga', vals_key:'positive_diff', 'desc':'Daily change in GA positive cases'}]},
 ];
 full_series.forEach(function(ser) { draw_series_plot(ser) });
 
+
+function mouse_hover(svg, vis_data, series) {
+  var mouseG = svg.append("g")
+    .attr("class", "mouse-over-effects");
+
+  mouseG.append("path") // this is the black vertical line to follow mouse
+    .attr("class", "mouse-line")
+    .style("stroke", "white")
+    .style("stroke-width", "1px")
+    .style("opacity", "0.8");
+
+  var lines = document.getElementsByClassName('line');
+
+  var mousePerLine = mouseG.selectAll('.mouse-per-line')
+    .data(vis_data)
+    .enter()
+    .append("g")
+    .attr("class", "mouse-per-line");
+
+  // mousePerLine.append("circle")
+  //   .attr("r", 7)
+  //   .style("stroke", function(d) {
+  //     return color(d.name);
+  //   })
+  //   .style("fill", "none")
+  //   .style("stroke-width", "1px")
+  //   .style("opacity", "0");
+  //
+  // mousePerLine.append("text")
+  //   .attr("transform", "translate(10,3)");
+
+  mouseG.append('svg:rect') // append a rect to catch mouse movements on canvas
+    .attr('width', width) // can't catch mouse events on a g element
+    .attr('height', height)
+    .attr('fill', 'none')
+    .attr('pointer-events', 'all')
+    .on('mouseout', function() { // on mouse out hide line, circles and text
+      d3.select(".mouse-line")
+        .style("opacity", "0");
+      d3.selectAll(".mouse-per-line circle")
+        .style("opacity", "0");
+      d3.selectAll(".mouse-per-line text")
+        .style("opacity", "0");
+    })
+    .on('mouseover', function() { // on mouse in show line, circles and text
+      d3.select(".mouse-line")
+        .style("opacity", "1");
+      d3.selectAll(".mouse-per-line circle")
+        .style("opacity", "1");
+      d3.selectAll(".mouse-per-line text")
+        .style("opacity", "1");
+    })
+    .on('mousemove', function() { // mouse moving over canvas
+      var mouse = d3.mouse(this);
+      d3.select(".mouse-line")
+        .attr("d", function() {
+          var d = "M" + mouse[0] + "," + height;
+          d += " " + mouse[0] + "," + 0;
+          return d;
+        });
+
+      d3.selectAll(".mouse-per-line")
+        .attr("transform", function(d, i) {
+          console.log(width/mouse[0])
+          var xDate = x.invert(mouse[0]),
+              bisect = d3.bisector(function(d) { return d.date; }).right;
+              idx = bisect(d.values, xDate);
+
+          var beginning = 0,
+              end = lines[i].getTotalLength(),
+              target = null;
+
+          while (true){
+            target = Math.floor((beginning + end) / 2);
+            pos = lines[i].getPointAtLength(target);
+            if ((target === end || target === beginning) && pos.x !== mouse[0]) {
+                break;
+            }
+            if (pos.x > mouse[0])      end = target;
+            else if (pos.x < mouse[0]) beginning = target;
+            else break; //position found
+          }
+
+          d3.select(this).select('text')
+            .text(y.invert(pos.y).toFixed(2));
+
+          return "translate(" + mouse[0] + "," + pos.y +")";
+        });
+    }); //mousemove
+
+}
 function find_first_nonzero_date(vis_data, series){
     series.series.forEach( function (ser, i) {
       var index = vis_data.findIndex(val => val[ser.vals_key] < 1)
@@ -259,72 +365,11 @@ function find_first_nonzero_date(vis_data, series){
 }
 
 
-function draw_counties1(us, state_prefix) {
-  var map_width = 960,
-      map_height = 600;
-
-  var svg = d3.select("#my_dataviz")
-    .append("div")
-      .attr("class", "plot-container")
-    .append("svg")
-      .attr("width", map_width + margin.left + margin.right)
-      .attr("height", map_height + margin.top + margin.bottom)
-    .append("g")
-      .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-
-  var color = d3.scaleThreshold()
-      .domain(d3.range(2, 10))
-      .range(d3.schemeBlues[9]);
-
-  var quantize = d3.scaleQuantize()
-      .domain([0, .15])
-      .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
 
 
-  var counties = topojson.feature(us, us.objects.counties),
-      state = counties.features.filter(function(d) { return String(d.id).startsWith(state_prefix); })[0];
 
-  var projection = d3.geoAlbers();
 
-  var path = d3.geoPath()
-      .projection(projection);
 
-  // var states = topojson.feature(us, us.objects.states),
-      // state = states.features.filter(function(d) { return d.id === 34; })[0];
-
-  projection
-      .scale(1)
-      .translate([0, 0]);
-
-  var b = path.bounds(state),
-      s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
-      t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
-
-  // projection
-  //     .scale(s)
-  //     .translate(t);
-
-  // Filter just to ga
-  // var ga_only = us.objects.counties.geometries.filter(function (d) { return String(d.id).startsWith(state_prefix)})
-  // us.objects.counties.geometries = ga_only;
-
-  svg.append("g")
-     .attr("class", "counties")
-   .selectAll("path")
-   .data(counties)
-   .enter().append("path")
-     .attr("fill", function(d) { return '#33333' })
-     .attr("d", path)
-   .append("title")
-     .text(function(d) { return 5 + "%"; });
-
- svg.append("path")
-     .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-     .attr("class", "states")
-     .attr("d", path);
-
-}
 
 function draw_counties(us, state_prefix) {
   var width = 900,
@@ -369,7 +414,7 @@ function draw_counties(us, state_prefix) {
 }
 
 let state_prefix = '13'
-draw_counties(topo_json, state_prefix);
+// draw_counties(topo_json, state_prefix);
 
 
 
