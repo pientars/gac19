@@ -140,7 +140,6 @@ function draw_series_plot(series){
       .attr("transform", "rotate(-35)");
 
 
-  console.log(series);
   // Y values Get max across all series, ooof ugly
   let y_max = Math.max(...series.series.map(function(ser) {
     return  d3.max( ser.values, (d) => isNaN(d.value) ? -1 : +d.value );
@@ -250,7 +249,7 @@ function draw_series_plot(series){
     .text((d) => d.desc );
 
   // Mouse hover lines and events
-  mouse_hover(svg, vis_data, series, x_scale, y_scale);
+  mouse_hover(svg, series, x_scale, y_scale);
 }
 
 // Here I riff on the full data to make some individual plots
@@ -261,58 +260,59 @@ full_series = [ {'title': 'GA: Positive, Negative, Tested',
                             'color':0,
                             'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive}; }),
                             'desc':'Positive Cases'},
-                          {'name':'Negative',
-                           'location':'ga',
-                           'color':1,
-                           'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.negative}; }),
-                           'desc':'Negative Cases'},
-                          {'name':'Tested',
-                           'location':'ga',
-                           'color':2,
-                           'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.tested}; }),
-                           'desc':'People Tested'}]},
-                {'title': 'US Positive, GA Positive ',
-                'log_y':false,
-                 'series':[{'name':'Positive (US)',
-                            'location':'us',
-                            'color':0,
-                            'values': vis_data['us'].map((d) => { return { "date":d.date, "value":d.positive}; }),
-                            'desc':'Positive Cases (US)'},
-                            {'name':'Positive (GA)',
-                            'location':'ga',
-                            'color':2,
-                            'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive}; }),
-                            'desc':'Positive Cases'}]},
-                {'title': 'GA: Positive, Death',
-                'log_y':false,
-                 'series':[{'name':'Positive',
-                            'location':'ga',
-                            'color':0,
-                            'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive}; }),
-                            'desc':'Positive Cases'},
-                           {'name':'Deaths',
-                            'location':'ga',
-                            'color':4,
-                            'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.death}; }),
-                            'desc':'Deaths'},]},
-                {'title': 'Change in Daily Positive Cases US vs GA ',
-                'log_y':false,
-                 'series':[{'name':'dPos/dt (US)',
-                            'location':'us',
-                            'color':0,
-                            'values': vis_data['us'].map((d) => { return { "date":d.date, "value":d.positive_diff}; }),
-                            'desc':'Daily change in US positive cases'},
-                           {'name':'dPos/dt (GA)',
-                            'location':'ga',
-                            'color':1,
-                            'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive_diff}; }),
-                            'desc':'Daily change in GA positive cases'}]},
-];
+]}]
+                          // {'name':'Negative',
+                          //  'location':'ga',
+                          //  'color':1,
+                          //  'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.negative}; }),
+                          //  'desc':'Negative Cases'},
+                          // {'name':'Tested',
+                          //  'location':'ga',
+                          //  'color':2,
+                          //  'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.tested}; }),
+                          //  'desc':'People Tested'}]},
+//                 {'title': 'US Positive, GA Positive ',
+//                 'log_y':false,
+//                  'series':[{'name':'Positive (US)',
+//                             'location':'us',
+//                             'color':0,
+//                             'values': vis_data['us'].map((d) => { return { "date":d.date, "value":d.positive}; }),
+//                             'desc':'Positive Cases (US)'},
+//                             {'name':'Positive (GA)',
+//                             'location':'ga',
+//                             'color':2,
+//                             'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive}; }),
+//                             'desc':'Positive Cases'}]},
+//                 {'title': 'GA: Positive, Death',
+//                 'log_y':false,
+//                  'series':[{'name':'Positive',
+//                             'location':'ga',
+//                             'color':0,
+//                             'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive}; }),
+//                             'desc':'Positive Cases'},
+//                            {'name':'Deaths',
+//                             'location':'ga',
+//                             'color':4,
+//                             'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.death}; }),
+//                             'desc':'Deaths'},]},
+//                 {'title': 'Change in Daily Positive Cases US vs GA ',
+//                 'log_y':false,
+//                  'series':[{'name':'dPos/dt (US)',
+//                             'location':'us',
+//                             'color':0,
+//                             'values': vis_data['us'].map((d) => { return { "date":d.date, "value":d.positive_diff}; }),
+//                             'desc':'Daily change in US positive cases'},
+//                            {'name':'dPos/dt (GA)',
+//                             'location':'ga',
+//                             'color':1,
+//                             'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive_diff}; }),
+//                             'desc':'Daily change in GA positive cases'}]},
+// ];
 
 full_series.forEach(function(ser) { draw_series_plot(ser) });
 
 
-function mouse_hover(svg, vis_data, series, x_scale, y_scale) {
+function mouse_hover(svg, series, x_scale, y_scale) {
   var mouseG = svg.append("g")
     .attr("class", "mouse-over-effects");
 
@@ -322,27 +322,26 @@ function mouse_hover(svg, vis_data, series, x_scale, y_scale) {
     .style("stroke-width", "1px")
     .style("opacity", "0.1");
 
-  var lines =svg.selectAll('.plot-line');
+  // var lines = svg.selectAll('.plot-line');
+  var lines = document.getElementsByClassName('plot-line')
   console.log(lines);
 
-  series.series.forEach( function (ser, i) {
-    var mousePerLine = mouseG.selectAll('.mouse-per-line')
-      .data(vis_data[ser.location])
-        .enter()
-        .append("g")
-        .attr("class", "mouse-per-line");
 
-    mousePerLine.append("circle")
-      .attr("r", 7)
-      .style("stroke", (d) => colors[i])
-      .style("fill", "none")
-      .style("stroke-width", "1px")
-      .style("opacity", "0");
+  var mousePerLine = mouseG.selectAll('.mouse-per-line')
+    .data(series.series)
+    .enter()
+    .append("g")
+    .attr("class", "mouse-per-line");
 
-    mousePerLine.append("text")
-      .attr("transform", "translate(10,3)");
+  mousePerLine.append("circle")
+    .attr("r", 7)
+    .style("stroke", (d) => colors[d.color])
+    .style("fill", "none")
+    .style("stroke-width", "1px")
+    .style("opacity", "0");
 
-  });
+  mousePerLine.append("text")
+    .attr("transform", "translate(10,3)");
 
   mouseG.append('svg:rect') // append a rect to catch mouse movements on canvas
     .attr('width', width) // can't catch mouse events on a g element
@@ -377,24 +376,26 @@ function mouse_hover(svg, vis_data, series, x_scale, y_scale) {
       d3.selectAll(".mouse-per-line")
         .attr("transform", function(d, i) {
           // console.log(width/mouse[0]);
-          console.log(i);
-          var xDate = x_scale.invert(mouse[0]);
-          var bisect = d3.bisector(function(d) { console.log(d);return d.date; }).right;
-          var idx = bisect(d['positive'], xDate);
-
           var beginning = 0,
               end = lines[i].getTotalLength(),
               target = null;
 
+          console.log(mouse[0], end, beginning);
+
           while (true){
             target = Math.floor((beginning + end) / 2);
             pos = lines[i].getPointAtLength(target);
+            
             if ((target === end || target === beginning) && pos.x !== mouse[0]) {
+              console.log('broke edge');
                 break;
             }
-            if (pos.x > mouse[0])      end = target;
+            if (pos.x > mouse[0]) end = target;
             else if (pos.x < mouse[0]) beginning = target;
-            else break; //position found
+            else {
+              console.log('opt found');
+              break;
+            } //position found
           }
 
           d3.select(this).select('text')
@@ -402,6 +403,7 @@ function mouse_hover(svg, vis_data, series, x_scale, y_scale) {
 
           return "translate(" + mouse[0] + "," + pos.y +")";
         });
+        // console.log(pos.y);
     }); //mousemove
 
 }
