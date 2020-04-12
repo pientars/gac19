@@ -1,0 +1,319 @@
+county_fips,county_name,established,origin text,etymology,fips_code,density,population,area,stateFIPS,1/22/20,1/23/20,1/24/20,1/25/20,1/26/20,1/27/20,1/28/20,1/29/20,1/30/20,1/31/20,2/1/20,2/2/20,2/3/20,2/4/20,2/5/20,2/6/20,2/7/20,2/8/20,2/9/20,2/10/20,2/11/20,2/12/20,2/13/20,2/14/20,2/15/20,2/16/20,2/17/20,2/18/20,2/19/20,2/20/20,2/21/20,2/22/20,2/23/20,2/24/20,2/25/20,2/26/20,2/27/20,2/28/20,2/29/20,3/1/20,3/2/20,3/3/20,3/4/20,3/5/20,3/6/20,3/7/20,3/8/20,3/9/20,3/10/20,3/11/20,3/12/20,3/13/20,3/14/20,3/15/20,3/16/20,3/17/20,3/18/20,3/19/20,3/20/20,3/21/20,3/22/20,3/23/20,3/24/20,3/25/20,3/26/20,3/27/20,3/28/20,3/29/20,3/30/20,3/31/20,4/1/20,4/2/20,4/3/20,4/4/20,4/5/20
+13001,Appling County,1818,Land ceded by the Creek Indians in the Treaty of Fort Jackson in 1814 and the Treaty of the Creek Agency in 1818,"Colonel Daniel Appling (1787–1818), a hero of the War of 1812",1,36.09,"18,368","509 sq mi
+(1,318 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,3,5,5,5
+13003,Atkinson County,1917,Clinch and Coffee Counties,"William Yates Atkinson (1854–99), governor of Georgia (1894–98) and speaker of the Georgia House of Representatives",3,24.51,"8,284","338 sq mi
+(875 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+13005,Bacon County,1914,"Appling, Pierce and Ware Counties","Augustus Octavius Bacon (1839–1914), U.S. Senator (1895–1914); President pro tempore of the United States Senate",5,39.29,"11,198","285 sq mi
+(738 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,5,6,6,6,6,7
+13007,Baker County,1825,Early County,"Colonel John Baker (died 1792), a hero of the American Revolutionary War",7,9.81,"3,366","343 sq mi
+(888 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,4,4,4,4,5,5
+13009,Baldwin County,1803,Creek cessions of 1802 and 1805,"Abraham Baldwin (1754–1807), a Founding Father; U.S. Senator (1799–1807); one of the Georgia delegates who signed the U.S. Constitution",9,179.72,"46,367","258 sq mi
+(668 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,3,5,7,7,11,11,15
+13011,Banks County,1859,Franklin and Habersham Counties,"Dr. Richard Banks (1784–1850), local physician noted for treating natives with smallpox",11,78.27,"18,316","234 sq mi
+(606 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,3,3,3,3,3,3
+13013,Barrow County,1914,"Gwinnett, Jackson and Walton counties","""Uncle Dave"" David Crenshaw Barrow Jr. (1852–1929), chancellor of the University of Georgia (1906–29)",13,433.14,"70,169","162 sq mi
+(420 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,2,2,5,6,6,6,9,19,20,20,22,25,25
+13015,Bartow County,1832,Created from a portion of Cherokee County in 1832 and originally called Cass County after General Lewis Cass,"General Francis S. Bartow (1816–61), Confederate political leader; first Confederate general killed in the American Civil War",15,218.83,"100,661","460 sq mi
+(1,191 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,7,9,9,10,19,26,54,56,56,61,76,82,93,107,117,119,125,137,147,153,159,160,160
+13017,Ben Hill County,1906,Irwin and Wilcox counties,"Benjamin Harvey Hill (1823–82), U.S. Senator (1877–82)",17,69.6,"17,538","252 sq mi
+(653 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,2,2,2,3,3,3,3,3,4,4
+13019,Berrien County,1856,"Coffee, Irwin, and Lowndes counties","John Macpherson Berrien (1781–1856), U.S. Senator; U.S. Attorney General",19,42.13,"19,041","452 sq mi
+(1,171 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,3,3,3,3
+13021,Bibb County,1822,"portions of Houston, Jones, Monroe, and Twiggs counties","Dr. William Wyatt Bibb (1780–1820), first Governor of Alabama; U.S. Senator",21,625.85,"156,462","250 sq mi
+(647 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2,4,6,8,11,13,14,16,20,23,25,34,36,39
+13023,Bleckley County,1912,Pulaski County,"Logan Edwin Bleckley (1827–1907), Georgia State Supreme Court Chief Justice",23,59.51,"12,913","217 sq mi
+(562 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1
+13025,Brantley County,1920,"Charlton, Pierce, and Wayne counties","William Gordon Brantley (1860–1934), U.S. Congressman",25,41.86,"18,587","444 sq mi
+(1,150 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+13027,Brooks County,1858,Lowndes and Thomas counties,"Captain Preston S. Brooks (1819–57), a hero of the Mexican–American War; Congressman from South Carolina",27,31.18,"15,403","494 sq mi
+(1,279 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,2,4,5,5,6
+13029,Bryan County,1793,Chatham County,"Jonathan Bryan (1708–88), colonial settler; famous state representative",29,72.88,"32,214","442 sq mi
+(1,145 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,3,3,5,7,7,7,7,9,11,15,15,17
+13031,Bulloch County,1796,Bryan and Screven Counties,"Archibald Bulloch (1729–77), Revolutionary War soldier; Speaker of the Georgia House of Representatives; acting governor of Georgia (1775–77) and first governor of Georgia",31,106.43,"72,694","683 sq mi
+(1,769 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,2,2,4,5,5,5
+13033,Burke County,1777,Originally organized as St George Parish,"Edmund Burke (1729–97), British-American political philosopher and Member of Parliament who was sympathetic to the cause of US independence",33,27.83,"23,125","831 sq mi
+(2,152 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,3,3,3,4,4,8,8,8,8,9,9
+13035,Butts County,1825,Henry and Monroe counties,"Captain Samuel Butts (1777–1814), a hero of the Creek War",35,125.8,"23,524","187 sq mi
+(484 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,3,3,3,5,5,6,8,8,9,9,10,12
+13037,Calhoun County,1854,Early and Baker counties,"John C. Calhoun (1782–1850), U.S. Congressman; U.S. Senator; Vice President of the United States from South Carolina",37,23.23,"6,504","280 sq mi
+(725 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,3,3,6,9,10,10,11,15,17
+13039,Camden County,1777,St Mary and St Thomas Parishes,"Charles Pratt, 1st Earl Camden (1714–94), Lord Chancellor of Great Britain who was sympathetic to the cause of the Revolution",39,81.59,"51,402","630 sq mi
+(1,632 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,2,2,2,4,4,5,6,6,6,9
+13043,Candler County,1914,"Bulloch, Emanuel and Tattnall counties","Allen Daniel Candler (1834–1910), state legislator; U.S. Congressman; Governor of Georgia (1898–1902)",43,45.01,"11,117","247 sq mi
+(640 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,2
+13045,Carroll County,1826,Created by the state legislature from lands ceded by the Creek Indians in 1825 in the Treaty of Indian Springs,"Charles Carroll (1737–1832), the last surviving signer of the Declaration of Independence",45,223.61,"111,580","499 sq mi
+(1,292 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,14,16,21,26,50,52,61,64,70,97,123,133,139,147,158,158
+13047,Catoosa County,1853,Walker and Whitfield counties,"Chief Catoosa, a Cherokee chief",47,401.52,"65,046","162 sq mi
+(420 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,3,3,3,4,4,5,6,6,6
+13049,Charlton County,1854,Camden County,"Robert Milledge Charlton (1807–54), jurist; U.S. Senator (1852–54); mayor of Savannah",49,17.02,"13,295","781 sq mi
+(2,023 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2
+13051,Chatham County,1777,Christ Church and St Philip Parishes,"William Pitt, Earl of Chatham (1708–78), British Prime Minister sympathetic to the Revolutionary cause",51,628.26,"276,434","440 sq mi
+(1,140 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,4,4,4,7,7,9,15,15,16,19,32,39,44,65,81,90
+13053,Chattahoochee County,1854,Muscogee and Marion counties,"Chattahoochee River, which forms the county's (and the state's) western border",53,52.36,"13,037","249 sq mi
+(645 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2
+13055,Chattooga County,1838,Walker and Floyd counties,Chattooga River,55,81.93,"25,725","314 sq mi
+(813 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,3,3,3,3,3,3,3
+13057,Cherokee County,1831,Cherokee Cession of 1831,"Cherokee Nation, which controlled this part of the state autonomously until 1831",57,521.97,"221,315","424 sq mi
+(1,098 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,2,2,5,5,7,7,9,13,16,17,18,24,30,36,44,50,54,60,69,78,85,94,114,120,124
+13059,Clarke County,1801,Jackson County,"Elijah Clarke (1733–99), a Revolutionary War hero",59,993.93,"120,266","121 sq mi
+(313 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,2,3,3,5,8,9,9,10,14,17,21,29,34,35,35,47,51,54,55,59,62,62
+13061,Clay County,1854,Randolph and Early counties,"Henry Clay (1777–1852), Secretary of State; Speaker of the House of Representatives; U.S. Senator from Kentucky",61,15.98,"3,116","195 sq mi
+(505 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,5,5,7,7,7,7
+13063,Clayton County,1858,Fayette and Henry counties,"Augustin Smith Clayton (1783–1839), a local jurist and U.S. Congressman",63,"1,859.36","265,888","143 sq mi
+(370 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,2,5,4,6,6,10,13,13,19,21,29,37,53,57,59,62,112,128,165,206,235,238
+13065,Clinch County,1850,Lowndes and Ware counties,"General Duncan Lamont Clinch (1784–1849), a hero of the War of 1812 and the Seminole War; U.S. Congressman",65,8.3,"6,718","809 sq mi
+(2,095 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2
+13067,Cobb County,1832,Cherokee County,"Colonel Thomas Willis Cobb (1784–1835), a hero of the War of 1812; U.S. Congressman",67,"2,080.71","707,442","340 sq mi
+(881 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,4,6,8,8,8,15,19,22,25,28,37,47,50,67,79,90,109,119,163,185,228,250,287,304,341,422,453,474
+13069,Coffee County,1854,"Clinch, Irwin, Telfair and Ware counties","General John E. Coffee (1782–1836), a hero of the War of 1812",69,72.07,"43,170","599 sq mi
+(1,551 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,2,2,3,7,9,9,9,9,9,15,15,15
+13071,Colquitt County,1856,Thomas and Lowndes counties,"Walter Terry Colquitt (1799–1855), Methodist pastor; U.S. Senator",71,83.58,"46,137","552 sq mi
+(1,430 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,4,5,5,6,7,20,21,28,44,49,51
+13073,Columbia County,1790,Richmond County,"Christopher Columbus (1446–1506), explorer",73,453.89,"131,627","290 sq mi
+(751 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,1,1,1,1,3,3,3,6,10,10,10,12,12,14,24,24,27,33,36,36
+13075,Cook County,1918,Berrien County,"General Philip Cook (1817–94), Confederate general; secretary of state",75,73.9,"16,923","229 sq mi
+(593 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1
+13077,Coweta County,1826,Created on Creek lands ceded in 1825 in the treaty of Indian Springs and Creek Cessions of 1826,Coweta tribe of the Creek Nation and their village near Columbus,77,295.55,"130,929","443 sq mi
+(1,147 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,2,2,2,3,3,3,6,8,9,9,10,10,14,19,20,23,37,41,42,48,56,64,67
+13079,Crawford County,1822,Houston County,"William Harris Crawford (1772–1834), U.S. Senator; ambassador to France; Secretary of the Treasury",79,38.77,"12,600","325 sq mi
+(842 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+13081,Crisp County,1905,Dooly County,"Charles Frederick Crisp (1845–96), Speaker of the House of Representatives",81,86.15,"23,606","274 sq mi
+(710 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,4,4,6,6,8,16,19,21,24,28,28
+13083,Dade County,1837,Walker County,"Major Francis L. Dade (1793–1835), a hero of the Seminole War",83,94.77,"16,490","174 sq mi
+(451 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1
+13085,Dawson County,1857,Gilmer and Lumpkin counties,"William Crosby Dawson (1798–1857), U.S. Senator (1849–55); state legislator",85,206.27,"22,422","211 sq mi
+(546 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,2,2,2,4,7,10,11,11,13,16,16
+13087,Decatur County,1823,Early County,"Commodore Stephen Decatur (1779–1820), a naval hero of the actions against the Barbary Pirates in the early 19th century",87,46.08,"27,509","597 sq mi
+(1,546 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,3,4,4,6,8,8,10,16,16,17
+13089,DeKalb County,1822,"Henry, Gwinnett, and Fayette counties","""Baron"" Johann DeKalb (1721–80) a German who accompanied Gilbert du Motier, marquis de Lafayette, and was inspector general of the Colonial Army",89,"2,638.39","707,089","268 sq mi
+(694 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,4,5,5,8,10,10,15,18,22,36,41,53,74,107,125,137,219,246,273,294,360,373,409,483,539,549
+13091,Dodge County,1870,"Montgomery, Pulaski and Telfair counties","William Earle Dodge (1805–1883), temperance leader; businessman from New York; a co-founder of Phelps, Dodge, and Company, a mining and metals company",91,42.57,"21,329","501 sq mi
+(1,298 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,2,2,3,5,5,5,6
+13093,Dooly County,1821,Creek Cession of 1821,"Colonel John Dooly (1740–80), a hero of the American Revolution",93,36.43,"14,318","393 sq mi
+(1,018 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,8,10,11,12,15,15
+13095,Dougherty County,1853,Baker County,"Charles Dougherty (1801–53), judge from Athens, Georgia",95,286.37,"94,501","330 sq mi
+(855 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,6,7,20,44,47,52,69,101,123,164,203,224,247,278,466,490,521,607,685,688
+13097,Douglas County,1870,Campbell and Carroll counties,"Stephen Arnold Douglas (1813–61), an Illinois Democratic Congressman who ran against Abraham Lincoln in the 1860 United States presidential election and lost",97,673.22,"133,971","199 sq mi
+(515 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,4,4,7,12,18,18,32,35,38,43,51,56,66,78,84,91
+13099,Early County,1818,Creek Cession of 1814,"Peter Early (1773–1817), tenth governor of Georgia",99,20.73,"10,594","511 sq mi
+(1,323 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,5,6,7,13,16,16,20,32,34,42,61,64,70
+13101,Echols County,1858,Clinch and Lowndes Counties,"General Robert M. Echols (1798–1847), a state legislator and a hero of the Mexican–American War",101,9.87,"3,988","404 sq mi
+(1,046 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+13103,Effingham County,1777,St Mathew and St Philip Parishes,"Thomas Howard, Earl of Effingham (1746–1791), who was sympathetic with the independence movement",103,111.03,"53,293","480 sq mi
+(1,243 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,2,3,3,3,4,4,4,4,5,5,6,6,9,12
+13105,Elbert County,1790,Wilkes County,"Samuel Elbert (1740–88), a general in the Revolutionary War; became the governor of Georgia in 1785",105,53.34,"19,684","369 sq mi
+(956 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1
+13107,Emanuel County,1812,Bulloch and Montgomery Counties,"Colonel David Emanuel (1744–1808), became the governor of Georgia in 1801",107,33.38,"22,898","686 sq mi
+(1,777 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1
+13109,Evans County,1914,Bulloch and Tattnall County,"General Clement Anselm Evans (1832–1911), a hero of the American Civil War; the commander in chief of the United Confederate Veterans",109,57.78,"10,689","185 sq mi
+(479 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+13111,Fannin County,1854,Gilmer and Union Counties,"Colonel James Walker Fannin Jr. (1809–36), a hero of the Texas Revolution",111,60.86,"23,492","386 sq mi
+(1,000 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,3,3,3,3,4,6,8,8,8,8
+13113,Fayette County,1821,Creek Cession of 1821,"Gilbert du Motier, marquis de Lafayette (1757–1834), a French hero of the Revolutionary War",113,545.81,"107,524","197 sq mi
+(510 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,5,5,4,5,5,5,8,9,9,9,9,11,12,12,14,22,26,27,42,48,48,55,61,66,67
+13115,Floyd County,1832,Cherokee County,"General John Floyd (1769–1839), soldier, U.S. Congressman",115,187.48,"96,177","513 sq mi
+(1,329 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,3,4,4,6,6,6,7,8,9,10,12,14,17,26,27,28,31,50,70,78,79,80,82
+13117,Forsyth County,1832,Cherokee County,"John Forsyth (1780–1841), Secretary of State under President Martin Van Buren",117,831.54,"187,928","226 sq mi
+(585 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,3,3,4,5,7,8,10,15,21,22,28,36,47,50,53,61,71,73
+13119,Franklin County,1784,Cherokee and Creek Cessions of 1783,"Benjamin Franklin (1706–1790), writer, inventor, philosopher, publisher, and a Founding Father of the United States",119,83.25,"21,894","263 sq mi
+(681 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,2,4,4,5,5,5,5,5
+13121,Fulton County,1853,DeKalb County + the former Campbell and Milton Counties and a portion of Cobb County,"Robert Fulton, an engineer and the inventor of the steamboat.",121,"1,848.34","1,041,423","529 sq mi
+(1,370 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,3,3,5,5,6,8,8,13,20,27,33,49,66,88,99,111,152,191,204,231,347,378,425,503,599,638,747,910,959,970
+13123,Gilmer County,1832,Cherokee County,"George Rockingham Gilmer (1780–1859), 16th governor of Georgia",123,66.02,"28,190","427 sq mi
+(1,106 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1
+13125,Glascock County,1857,Warren County,"General Thomas Glascock (1780–1841), a hero of the War of 1812 and the Seminole War of 1817; U.S. Congressman",125,21.82,"3,142","144 sq mi
+(373 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+13127,Glynn County,1777,St David and St Patrick Parishes,"John Glynn (1722–79), British Member of Parliament and Serjeant-at-law, who was sympathetic with the cause of American independence",127,192,"81,022","422 sq mi
+(1,093 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,4,4,5,5,6,7,7,8,17,17,19,21,23,28,29
+13129,Gordon County,1850,Cass (now Bartow) and Floyd Counties,"William Washington Gordon (1796–1842), first president of the Central of Georgia Railroad",129,157.09,"55,766","355 sq mi
+(919 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,3,3,3,4,4,6,8,9,9,12,14,14,15,16,18,20,21,23,23
+13131,Grady County,1905,Decatur and Thomas Counties,"Henry Woodfin Grady (1850–89), orator; managing editor of the Atlanta Constitution",131,55.55,"25,440","458 sq mi
+(1,186 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,3,3,3
+13133,Greene County,1786,Washington County,"General Nathanael Greene (1742–86), a hero of the Revolutionary War",133,41.47,"16,092","388 sq mi
+(1,005 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,3,7,8,8,12,12,12
+13135,Gwinnett County,1818,Cherokee Cession of 1817 and Creek Cession of 1818,"Button Gwinnett (1735–1777), one of Georgia's delegates to the Continental Congress who signed the Declaration of Independence",135,"1,944.68","842,046","433 sq mi
+(1,121 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,4,5,7,7,12,23,23,27,35,46,69,79,121,131,145,178,242,257,303,353,400,410
+13137,Habersham County,1818,Cherokee Cessions of 1817 and 1819,"Colonel Joseph Habersham (1751–1815), a hero of the Revolutionary War; U.S. Postmaster General in the Cabinet of George Washington",137,156.55,"43,520","278 sq mi
+(720 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2
+13139,Hall County,1818,Cherokee Cessions of 1817 and 1819,"Dr. Lyman Hall (1724–90), one of Georgia's delegates to the Continental Congress who signed the Declaration of Independence; became the governor of Georgia in 1783",139,470.6,"185,416","394 sq mi
+(1,020 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,3,5,6,9,9,10,16,19,22,30,31,33,34,67,71,72,81,117,117
+13141,Hancock County,1793,Greene and Washington counties,"John Hancock (1737–93), President of the Continental Congress; first signer of the Declaration of Independence",141,19.02,"8,996","473 sq mi
+(1,225 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+13143,Haralson County,1856,Carroll and Polk Counties,"General Hugh Anderson Haralson (1805–54), U.S. Congressman",143,100.71,"28,400","282 sq mi
+(730 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,2,4,5,6,6,10,10,10
+13145,Harris County,1827,Muscogee and Troup counties,"Charles Harris (1772–1827), prominent attorney from Savannah",145,70.15,"32,550","464 sq mi
+(1,202 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,2,3,3,3,3,5,6,6,7
+13147,Hart County,1853,Elbert and Franklin counties,"Nancy Morgan Hart (1735–1830), a heroine of the Revolutionary War",147,110,"25,518","232 sq mi
+(601 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,3,3,3,3,3,3
+13149,Heard County,1830,"Carroll, Coweta and Troup Counties","Stephen Heard (1740–1815), a hero of the Revolutionary War",149,39.3,"11,633","296 sq mi
+(767 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2
+13151,Henry County,1821,Creek Cession of 1821,"Patrick Henry (1736–99), prominent lawyer, orator, and a Founding Father of the United States",151,647.22,"209,053","323 sq mi
+(837 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,2,2,3,6,7,7,9,13,20,29,44,50,56,68,86,95,115,143,167,168
+13153,Houston County,1821,Creek Cession of 1821,"John Houstoun (1744–1796), member of the Continental Congress; became governor of Georgia in 1778",153,387.63,"146,136","377 sq mi
+(976 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,5,6,9,10,13,15,26,30,44,49,58,59,62
+13155,Irwin County,1818,Creek Cessions of 1814 and 1818,"Jared Irwin (1751–1818), the governor who rescinded the Yazoo Act in 1796",155,26.89,"9,600","357 sq mi
+(925 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,3,3,3,3,3,3,5,5,6,6,6
+13157,Jackson County,1796,Franklin County,"General James Jackson (1757–1806), a hero of the Revolutionary War",157,177.11,"60,571","342 sq mi
+(886 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,2,2,2,8,10,11,13,15,15
+13159,Jasper County,1807,Baldwin (FKA Randolph County 1807–12),"Sergeant William Jasper (1750–1779), a hero of the Revolutionary War",159,36.84,"13,630","370 sq mi
+(958 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,3,3
+13161,Jeff Davis County,1905,Appling and Coffee counties,"Jefferson Davis (1808–89), the first and only President of the Confederate States of America",161,45.51,"15,156","333 sq mi
+(862 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+13163,Jefferson County,1796,Burke and Warren Counties,"Thomas Jefferson (1743–1826), third President of the United States",163,31.12,"16,432","528 sq mi
+(1,368 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,2,2,3,3
+13165,Jenkins County,1905,"Bulloch, Burke, Emanuel, and Screven Counties","Charles Jones Jenkins (1805–83), governor of Georgia, who was the author of the famous Georgia Platform of 1850",165,26.32,"9,213","350 sq mi
+(906 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,2,2,2
+13167,Johnson County,1858,"Emanuel, Laurens and Washington counties","Herschel Vespasian Johnson (1812–80), U.S. Senator; Governor of Georgia",167,32.56,"9,897","304 sq mi
+(787 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,2,3
+13169,Jones County,1807,Baldwin County,"James Jones (1769–1801), U.S. Congressman",169,72.53,"28,577","394 sq mi
+(1,020 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,2,2,2,3,4,5,6,6,6
+13171,Lamar County,1920,Monroe and Pike Counties,"Lucius Quintus Cincinnatus Lamar (1825–93), U.S. Senator; Associate Justice of the U.S. Supreme Court",171,97.61,"18,057","185 sq mi
+(479 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,2,2,2,2,2,2,2,3,3,4,6,6,7,7
+13173,Lanier County,1920,"Berrien, Clinch and Lowndes Countries","Sidney Lanier (1842–1881), attorney, linguist, mathematician,[citation needed] and musician",173,55.61,"10,400","187 sq mi
+(484 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1
+13175,Laurens County,1807,Wilkinson County,"Colonel John Laurens (1754–82), aide to George Washington during the Revolutionary War",175,59.09,"48,041","813 sq mi
+(2,106 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,6,7,7,7,9,12,13,13,14,14,15,15,15
+13177,Lee County,1826,Creek Cessions of 1826,"Lieutenant Colonel Henry Lee III (1732–1794), a hero of the Revolutionary War, who attained the nickname ""Light-Horse Harry""",177,80.75,"28,746","356 sq mi
+(922 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,3,13,14,16,19,24,25,29,37,39,43,44,90,94,104,123,134,138
+13179,Liberty County,1777,"St Andrew, St James, and St John Parishes",Named in honor of the noted patriotism of the citizens of Midway in their support of the cause of colonial independence,179,126.15,"65,471","519 sq mi
+(1,344 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,3,3,4,5,7,7,9,10,13
+13181,Lincoln County,1796,Wilkes County,"General Benjamin Lincoln (1733–1810), a hero of the Revolutionary War; was later assigned to the suppression of Shays' Rebellion",181,36.67,"7,737","211 sq mi
+(546 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,3,3,3,3,4,4,4,5,5,5,5
+13183,Long County,1920,Liberty County,"Dr. Crawford Williamson Long (1815–78), in 1842 the first man to use diethyl ether as an anesthetic for dental surgery",183,40.02,"16,048","401 sq mi
+(1,039 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1
+13185,Lowndes County,1825,Irwin County,"William Jones Lowndes (1782–1822), prominent figure in the affairs of South Carolina throughout the formative years of the United States",185,227.29,"114,552","504 sq mi
+(1,305 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2,3,4,5,6,7,7,8,8,11,12,14,20,20,20,21,23,24,26,32,37,37
+13187,Lumpkin County,1832,"Cherokee, Habersham, and Hall Counties","Wilson Lumpkin (1783–1870), Governor of Georgia; U.S. Senator",187,107.79,"30,611","284 sq mi
+(736 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,3,3,4,4,4,4,4,7,7,7,7,9,9
+13189,Macon County,1837,Houston and Marion Counties,"General Nathaniel Macon (1758–1837), Speaker of the House of Representatives; U.S. Senator",193,35.39,"14,263","403 sq mi
+(1,044 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,3,3,4,5,6,6
+13191,Madison County,1811,"Clarke, Elbert, Franklin, Jackson and Oglethorpe Counties","James Madison (1751–1836), fourth President of the United States; chief writer of the U.S. Constitution",195,98.32,"27,922","284 sq mi
+(736 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2,2,2
+13193,Marion County,1827,Lee and Muscogee Counties,"General Francis Marion (1732–95), the ""Swamp Fox""; a hero of the Revolutionary War",197,23.74,"8,711","367 sq mi
+(951 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,2,2,2,2,4,4
+13195,McDuffie County,1870,Columbia and Warren,"George McDuffie (1790–1851), orator and governor of South Carolina",189,83.32,"21,663","260 sq mi
+(673 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,3,3,3,3,3,3,3,5,7,7,7
+13197,McIntosh County,1793,Liberty County,"General Lachlan McIntosh (1727–1806), a hero of the Revolutionary War",191,31.89,"13,839","434 sq mi
+(1,124 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2
+13199,Meriwether County,1827,Formed from Troup County,"General David Meriwether (1755–1822), a hero of the Revolutionary War; U.S. Congressman",199,42.29,"21,273","503 sq mi
+(1,303 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,3,3,3,5,6,6,7,9,10,11,11
+13201,Miller County,1856,Baker and Early Counties,"Andrew Jackson Miller (1806–56), president of the Medical College of Georgia",201,21.09,"5,969","283 sq mi
+(733 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,2,2,2,4,4,4,4,4,4,10,10,14
+13205,Mitchell County,1857,Baker County,"Gen. Henry Mitchell (1760–1839), a hero of the Revolutionary War",205,45.2,"23,144","512 sq mi
+(1,326 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,10,14,15,15,16,34,39,40,46,53,56
+13207,Monroe County,1821,Creek Cession of 1821,"James Monroe (1758–1831), the fifth President of the United States and the creator of the Monroe Doctrine of 1823",207,67.27,"26,637","396 sq mi
+(1,026 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,3,3,3,3,3,3,3,5,6,6,7,7,9
+13209,Montgomery County,1793,Washington County,"General Richard Montgomery (1738–75), hero of the Revolutionary War",209,36.38,"8,913","245 sq mi
+(635 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+13211,Morgan County,1807,Baldwin County,"General Daniel Morgan (1736–1802), a hero of the Revolutionary War; U.S. Congressman",211,51.09,"17,881","350 sq mi
+(906 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,2,2,2,2,2,2
+13213,Murray County,1832,Cherokee County,"Thomas W. Murray (1790–1832), famous state legislator",213,114.51,"39,392","344 sq mi
+(891 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,3,4,5,5,7,7,9,9
+13215,Muscogee County,1826,Creek Cession of 1826,"Muskogee ethnic group, to which the Creek and Seminole Nations belong",215,918.58,"198,413","216 sq mi
+(559 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,2,2,4,4,6,7,8,9,14,19,22,26,31,35,37
+13217,Newton County,1821,"Henry, Jasper, and Walton Counties","Sergeant John Newton (1755–80), a hero of the Revolutionary War",217,367.77,"101,505","276 sq mi
+(715 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,3,3,4,4,4,4,6,8,12,15,15,18,22,31,34,37,42,52,55
+13219,Oconee County,1875,Clarke County,"Oconee River, which forms its eastern boundary",219,180.74,"33,619","186 sq mi
+(482 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,3,5,6,7,10,10,11,12,16,17,19,21,24,24
+13221,Oglethorpe County,1793,Wilkes County,"General James Edward Oglethorpe (1696–1785), the founder of the Colony of Georgia",221,33.15,"14,618","441 sq mi
+(1,142 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1
+13223,Paulding County,1832,Cherokee County,"John Paulding (1759–1818), a hero of the Revolutionary War",223,461.15,"144,800","314 sq mi
+(813 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,3,3,3,4,4,5,6,6,7,13,20,23,26,31,33,35,46,50,51
+13225,Peach County,1924,Houston and Macon Counties,Its location in Central Georgia is one of the richest peach-producing regions in the country.,225,182.93,"27,622","151 sq mi
+(391 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,3,3,3,5,5,6,6,6,7,7,7,7,10,10,13
+13227,Pickens County,1853,Cherokee and Gilmer counties,"General Andrew Pickens (1739–1817), a hero of the Revolutionary War; U.S. Congressman",227,126.16,"29,268","232 sq mi
+(601 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,3,4,4,4,4,5,5,6,7,7,9,9,9,9
+13229,Pierce County,1857,Appling and Ware Counties,"Franklin Pierce (1804–1869), fourteenth President of the United States",229,54.94,"18,844","343 sq mi
+(888 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,2,2,2,3,7,10,16,16,16
+13231,Pike County,1822,Monroe County,"General Zebulon Pike (1779–1813), explorer and a hero of the War of 1812",231,81.7,"17,810","218 sq mi
+(565 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,2,2,2,4,5,5
+13233,Polk County,1851,Floyd and Paulding Counties,"James Knox Polk (1795–1849), eleventh President of the United States",233,132.44,"41,188","311 sq mi
+(805 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,1,1,1,1,1,1,1,1,1,1,1,1,3,4,4,4,8,9,10,10,10,10,14,15,16,16,18,18,18
+13235,Pulaski County,1808,Laurens County,"Count Kazimierz Pułaski of Poland (1748–79), a hero of the Revolutionary War",235,47.45,"11,720","247 sq mi
+(640 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,2,3,3,3,3,4,5,5,6,6
+13237,Putnam County,1807,Baldwin County,"General Israel Putnam (1718–90), a hero of the Revolutionary War",237,61.62,"21,198","344 sq mi
+(891 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,2,2
+13239,Quitman County,1858,Randolph and Stewart counties,"General John Anthony Quitman (1799–1858), a hero of the Mexican-American War",239,15.82,"2,404","152 sq mi
+(394 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1
+13241,Rabun County,1819,Cherokee Cession of 1819,"William Rabun (1771–1819), Governor of Georgia (1817–19)",241,43.93,"16,297","371 sq mi
+(961 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,3,3
+13243,Randolph County,1828,Lee County,"John Randolph of Roanoke (1773–1833), U.S. Congressman",243,17.08,"7,327","429 sq mi
+(1,111 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,2,3,3,3,3,4,4,4,11,18,18
+13245,Richmond County,1777,St Paul Parish,"Charles Lennox, 3rd Duke of Richmond (1735–1806), who was sympathetic to the cause of colonial independence",245,625.27,"202,587","324 sq mi
+(839 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,8,10,10,11,10,10,11,11,12,12,17,40,41,42,49,51,51
+13247,Rockdale County,1870,Henry and Newton counties,"Rockdale Church, which was so named for the subterranean bed of granite that underlies this region of the state",247,655.11,"85,820","131 sq mi
+(339 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,2,5,8,10,13,16,17,18,29,45,47,57,67,75,77
+13249,Schley County,1857,Marion and Sumter counties,"William Schley (1786–1858), governor of Georgia (1835–37)",249,29.7,"4,990","168 sq mi
+(435 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,4,4,4,5,6,6
+13251,Screven County,1793,Burke and Effingham Counties,"General James Screven (1744–1778), a hero of the Revolutionary War",251,21.92,"14,202","648 sq mi
+(1,678 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,2,2,2
+13253,Seminole County,1920,Decatur and Early Counties,Seminole Nation,253,37.59,"8,947","238 sq mi
+(616 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,3,5,5,5,5,6,8,8,9
+13255,Spalding County,1851,"Fayette, Henry, and Pike County","Thomas Spalding (1774–1851), U.S. Congressman, state legislator, and agriculturalist",255,322.55,"63,865","198 sq mi
+(513 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,4,5,10,11,11,11,12,14,15,17,17,23,26,26
+13257,Stephens County,1905,Franklin and Habersham Counties,"Alexander Stephens (1812–83), U.S. Congressman; Governor of Georgia; first and only Vice President of the Confederate States of America",257,144.64,"25,891","179 sq mi
+(464 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,1,2,3,3,3,4,5,5,5,6,6
+13259,Stewart County,1830,Randolph County,"General Daniel Stewart (1759–1829), a hero of the Revolutionary War and the War of 1812",259,13.16,"6,042","459 sq mi
+(1,189 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1
+13261,Sumter County,1831,Lee County,"General Thomas Sumter (1734–1832), the ""Fighting Gamecock,"" a hero of the Revolutionary War",261,65.06,"31,554","485 sq mi
+(1,256 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,4,5,7,10,13,15,17,35,38,48,67,83,83
+13263,Talbot County,1827,Muscogee County,"Matthew Talbot (1762–1827), served in the Georgia State Senate for 15 years, including two years as the President of the Senate, and Governor of Georgia for two weeks in 1819",263,16.58,"6,517","393 sq mi
+(1,018 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,3,3,4
+13265,Taliaferro County,1825,"Greene, Hancock, Oglethorpe, Warren, and Wilkes Counties","Colonel Benjamin Taliaferro (1750–1821), U.S. Congressman; a hero of the Revolutionary War",265,8.62,"1,680","195 sq mi
+(505 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+13267,Tattnall County,1801,Montgomery County,"Josiah Tattnall (1764–1803), U.S. Senator; Governor of Georgia",267,52.45,"25,384","484 sq mi
+(1,254 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3
+13269,Taylor County,1852,"Macon, Marion and Talbot Counties","Zachary Taylor (1784–1850), the twelfth President of the United States",269,22.28,"8,420","378 sq mi
+(979 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,2,2
+13271,Telfair County,1807,Wilkinson County,"Edward Telfair (1735–1807), the second Governor of Georgia following the establishment of the United States",271,37.07,"16,349","441 sq mi
+(1,142 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,4,4
+13273,Terrell County,1856,Lee and Randolph Counties,"Dr. William Terrell (1778–1855), U.S. Congressman",273,26.92,"9,045","336 sq mi
+(870 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,3,1,5,6,10,10,20,40,46,47,50,57,58
+13275,Thomas County,1825,Decatur and Irwin Counties,"General Jett Thomas (1776–1817), a hero of the War of 1812",275,81.61,"44,724","548 sq mi
+(1,419 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,3,7,7,7,10,14,17,26,26,28
+13277,Tift County,1905,"Berrien, Irwin and Worth Counties","Colonel Nelson Tift (1810–91), a captain in the Confederate States Navy; U.S. Congressman",277,154.96,"41,064","265 sq mi
+(686 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,2,4,7,7,13,13,13,19,20,28,29,34,34,34
+13279,Toombs County,1905,"Emanuel, Tattnall, and Montgomery Counties","General Robert Toombs (1810–85), U.S. Senator; Confederate States Secretary of State",279,74.43,"27,315","367 sq mi
+(951 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,2,2,3,3,5,5,5,5
+13281,Towns County,1856,Rabun and Union Counties,"George Washington Towns (1801–54), governor of Georgia during the antebellum period",281,63.22,"10,495","166 sq mi
+(430 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1
+13283,Treutlen County,1918,Emanuel and Montgomery Counties,"John A. Treutlen (1726–82), the first elected Governor of Georgia (1777–78)",283,33.68,"6,769","201 sq mi
+(521 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+13285,Troup County,1826,Creek Cession of 1826,"George M. Troup (1780–1856), Governor of Georgia (1823–27); U.S. Senator",285,165.38,"68,468","414 sq mi
+(1,072 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,2,2,4,4,4,6,1,9,9,9,10,15,18,19,21,30,33,34
+13287,Turner County,1905,"Dooly, Irwin, Wilcox and Worth Counties","Captain Henry Gray Turner (1839–1904), U.S. Congressman; a hero of the American Civil War",287,29.41,"8,410","286 sq mi
+(741 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,3,4,5,6,12,12,12
+13289,Twiggs County,1809,Wilkinson County,"General John Twiggs (1750–1816), a hero of the Revolutionary War; Governor of Georgia",289,23.46,"8,447","360 sq mi
+(932 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2
+13291,Union County,1832,Cherokee County,Federal union of the states,291,66.41,"21,451","323 sq mi
+(837 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1
+13293,Upson County,1824,Crawford and Pike Counties,"Stephen Upson (1786–1824), state legislator",293,81.69,"26,630","326 sq mi
+(844 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,5,5,5,5,6,6,8,12,13
+13295,Walker County,1833,Murray County,"Major Freeman Walker (1780–1827), U.S. Senator (1819–1821)",295,152.68,"68,094","446 sq mi
+(1,155 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,3,3,3
+13297,Walton County,1818,Creek Cession of 1818,"George Walton (1749–1804), one of Georgia's delegates to the Continental Congress who signed the Declaration of Independence",297,257.07,"84,575","329 sq mi
+(852 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,2,2,4,5,9,13,15,16,18,21
+13299,Ware County,1824,Appling County,"Nicholas Ware (1769–1824), U.S. Senator (1821–24)",299,39.67,"35,821","903 sq mi
+(2,339 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,5,5,5,10,12,14,17,18,18
+13301,Warren County,1793,"Columbia, Hancock, Richmond, and Wilkes Counties","General Joseph Warren (1741–75), a hero of the Revolutionary War",301,19.5,"5,578","286 sq mi
+(741 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,3,4,4,4,5,5
+13303,Washington County,1784,Creek Cession of 1783,"George Washington (1732–99), the first President of the United States, although named after him as a general",303,30.7,"20,879","680 sq mi
+(1,761 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,2,2,2,2,2,4,4,5,5,5,6
+13305,Wayne County,1803,Creek Cession of 1802,"General Anthony Wayne (1745–96), known as ""Mad Anthony Wayne""; U.S. Congressman; a hero of the Revolutionary War and the Northwest Indian War",305,46.98,"30,305","645 sq mi
+(1,671 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1
+13307,Webster County,1853,Stewart County (Formally Kinchafoonee),"Daniel Webster (1782–1852), U.S. Secretary of State; supported Henry Clay's Compromise of 1850",307,13.3,"2,793","210 sq mi
+(544 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,2
+13309,Wheeler County,1912,Montgomery County,"General Joseph Wheeler (1836–1906), U.S. Congressman; a hero of the American Civil War and the Spanish–American War",309,26.47,"7,888","298 sq mi
+(772 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1
+13311,White County,1857,Habersham County,"Colonel John White, a hero of the Revolutionary War",311,113.87,"27,556","242 sq mi
+(627 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,3,3,3,3,4,4
+13313,Whitfield County,1851,Murray County,"George Whitefield (1714–70), pastor; established the Bethesda Orphanage near Savannah",313,356.41,"103,359","290 sq mi
+(751 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,1,1,6,6,8,8,10,14,14,15,16,16
+13315,Wilcox County,1857,"Dooly, Irwin, and Pulaski counties","General Mark Wilcox (1800–50), a noted soldier and state legislator",315,23.86,"9,068","380 sq mi
+(984 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1
+13317,Wilkes County,1777,Cherokee and Creek Cessions of 1773,"John Wilkes (1727–97), a British Member of Parliament who sympathized with the cause of American independence",317,21.39,"10,076","471 sq mi
+(1,220 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,3,3,3
+13319,Wilkinson County,1803,Creek Cessions of 1802 and 1805,"General James Wilkinson (1757–1825), veteran of the Revolutionary War and of the War of 1812; Senior Officer of the U.S. Army; turned out to be an agent of the Spanish government",319,21.43,"9,577","447 sq mi
+(1,158 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2,2
+13321,Worth County,1853,Dooly and Irwin Counties,"General William J. Worth (1794–1849), a hero of the Mexican–American War",321,38.14,"21,741","570 sq mi
+(1,476 km2)",13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,3,4,3,3,7,8,10,12,28,28,28,33,36,37
