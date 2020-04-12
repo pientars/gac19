@@ -210,7 +210,7 @@ function draw_series_plot(series){
 
   // Begin drawing content
   var line = d3.line()
-    .curve(d3.curveBasis)
+    // .curve(d3.curveBasis)
     .defined(d => !isNaN(d.value) && d.value > 0  )
     .x( (d) => x_scale(d.date))
     .y( (d) =>  y_scale(d.value))
@@ -241,6 +241,7 @@ function draw_series_plot(series){
     .attr("fill",(d) => colors[d.color])
     .text((d) => d.name );
 
+  /////////////////////////// Legend
   // Draw the legend
   let legend_pos = [20, 20];
   let legend_y_off = 20;
@@ -262,8 +263,81 @@ function draw_series_plot(series){
     .attr("alignment-baseline","middle")
     .text((d) => d.desc );
 
+  /////////////////////////// Mouse Hovers
   // Mouse hover lines and events
-  mouse_hover(svg, series, x_scale, y_scale);
+  var Tooltip = svg.selectAll(".tooltip")
+    .data(series.series)
+    .enter()
+    .append("g")
+    // .attr("transform", "translate(100,100)")
+    // .style("opacity", 1)
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+
+    Tooltip.append('circle')
+      .attr("cx", 0)
+      .attr("cy", 0)
+      .attr("r", 5)
+      .attr("fill", "none")
+      .attr("stroke-width", 1)
+      .attr("stroke", (d) => colors[d.color]);
+
+    Tooltip.append("rect")
+      .attr("width", 60)
+      .attr("height", 24)
+      // .attr("fill", "#FFF")
+      .attr("fill", "#241C15")
+      .attr("opacity", 0.7)
+      .attr("transform", "translate(17,-12)")
+
+    Tooltip.append("line")
+      .attr("x1", 6)
+      .attr("y1", 0)
+      .attr("x2", 16)
+      .attr("y2", 0)
+      .attr("stroke", (d) => colors[d.color]);
+
+    Tooltip.append('text')
+      .attr("transform", "translate(20,5)")
+      .attr("fill", (d) => colors[d.color])
+      .text("1887")
+
+  var mouseover = (d) => {
+    Tooltip
+      .style("opacity", 1)
+  }
+
+  var mousemove = (d,i) => {
+    let left_datum = d[0];
+    console.log(d,i);
+    Tooltip
+      .attr("transform", (ser) => "translate(" +x_scale(left_datum.date)+", "+y_scale(ser.values[i].value)+")");
+
+    Tooltip.select("text")
+      .text((ser) => ser.values[i].value);
+
+    var bbox = Tooltip.selectAll("text").node().getBBox();
+    Tooltip.select("rect")
+      .attr("width", bbox.width+6);
+  }
+
+  var mouseout = (d) => {
+    Tooltip
+      .style("opacity", 0)
+  }
+
+  svg.append("g")
+    .attr("fill", "none")
+    .attr("pointer-events", "all")
+  .selectAll("rect")
+  .data(d3.pairs(series.series[0].values))
+  .join("rect")
+    .attr("x", ([a, b]) => x_scale(a.date))
+    .attr("height", (d) => height )
+    .attr("width", ([a, b]) => x_scale(a.date) - x_scale(b.date))
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseout", mouseout);
 
 }
 
@@ -285,134 +359,45 @@ full_series = [ {'title': 'GA: Positive, Negative, Tested',
                            'color':2,
                            'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.tested}; }),
                            'desc':'People Tested'}]},
-    ];
-//                 {'title': 'US Positive, GA Positive ',
-//                 'log_y':false,
-//                  'series':[{'name':'Positive (US)',
-//                             'location':'us',
-//                             'color':0,
-//                             'values': vis_data['us'].map((d) => { return { "date":d.date, "value":d.positive}; }),
-//                             'desc':'Positive Cases (US)'},
-//                             {'name':'Positive (GA)',
-//                             'location':'ga',
-//                             'color':2,
-//                             'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive}; }),
-//                             'desc':'Positive Cases'}]},
-//                 {'title': 'GA: Positive, Death',
-//                 'log_y':false,
-//                  'series':[{'name':'Positive',
-//                             'location':'ga',
-//                             'color':0,
-//                             'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive}; }),
-//                             'desc':'Positive Cases'},
-//                            {'name':'Deaths',
-//                             'location':'ga',
-//                             'color':4,
-//                             'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.death}; }),
-//                             'desc':'Deaths'},]},
-//                 {'title': 'Change in Daily Positive Cases US vs GA ',
-//                 'log_y':false,
-//                  'series':[{'name':'dPos/dt (US)',
-//                             'location':'us',
-//                             'color':0,
-//                             'values': vis_data['us'].map((d) => { return { "date":d.date, "value":d.positive_diff}; }),
-//                             'desc':'Daily change in US positive cases'},
-//                            {'name':'dPos/dt (GA)',
-//                             'location':'ga',
-//                             'color':1,
-//                             'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive_diff}; }),
-//                             'desc':'Daily change in GA positive cases'}]},
-// ];
+                {'title': 'US Positive, GA Positive ',
+                'log_y':false,
+                 'series':[{'name':'Positive (US)',
+                            'location':'us',
+                            'color':0,
+                            'values': vis_data['us'].map((d) => { return { "date":d.date, "value":d.positive}; }),
+                            'desc':'Positive Cases (US)'},
+                            {'name':'Positive (GA)',
+                            'location':'ga',
+                            'color':2,
+                            'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive}; }),
+                            'desc':'Positive Cases'}]},
+                {'title': 'GA: Positive, Death',
+                'log_y':false,
+                 'series':[{'name':'Positive',
+                            'location':'ga',
+                            'color':0,
+                            'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive}; }),
+                            'desc':'Positive Cases'},
+                           {'name':'Deaths',
+                            'location':'ga',
+                            'color':4,
+                            'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.death}; }),
+                            'desc':'Deaths'},]},
+                {'title': 'Change in Daily Positive Cases US vs GA ',
+                'log_y':false,
+                 'series':[{'name':'dPos/dt (US)',
+                            'location':'us',
+                            'color':0,
+                            'values': vis_data['us'].map((d) => { return { "date":d.date, "value":d.positive_diff}; }),
+                            'desc':'Daily change in US positive cases'},
+                           {'name':'dPos/dt (GA)',
+                            'location':'ga',
+                            'color':1,
+                            'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive_diff}; }),
+                            'desc':'Daily change in GA positive cases'}]},
+];
 
 full_series.forEach(function(ser) { draw_series_plot(ser) });
-
-
-function mouse_hover(svg, series, x_scale, y_scale) {
-
-  // series.series.forEach((ser, i) => {
-  //
-  // })
-
-  var Tooltip = svg.append("g")
-    .attr("transform", "translate(100,100)")
-    .style("opacity", 1)
-    .attr("class", "tooltip")
-
-    Tooltip.append('circle')
-      .attr("cx", 0)
-      .attr("cy", 0)
-      .attr("r", 5)
-      .attr("fill", "none")
-      .attr("stroke-width", 1)
-      .attr("stroke", colors[0]);
-
-    Tooltip.append("rect")
-      .attr("width", 60)
-      .attr("height", 24)
-      // .attr("fill", "#FFF")
-      .attr("fill", "#241C15")
-      .attr("opacity", 0.7)
-      .attr("transform", "translate(17,-12)")
-
-    Tooltip.append("line")
-      .attr("x1", 6)
-      .attr("y1", 0)
-      .attr("x2", 16)
-      .attr("y2", 0)
-      .attr("stroke", colors[0]);
-
-
-    Tooltip.append('text')
-      .attr("transform", "translate(20,5)")
-      .attr("fill", colors[0])
-      .text("1887")
-
-
-  var mouseover = function(d) {
-    Tooltip
-      .style("opacity", 1)
-    // d3.select(this)
-      // .style("stroke", "black")
-    //   .style("opacity", 1)
-  }
-
-  var mousemove = function(d) {
-    let left_datum = d[0];
-    Tooltip
-      .attr("transform", "translate(" +x_scale(left_datum.date)+", "+y_scale(left_datum.value)+")")
-
-    Tooltip.select("text")
-      .text(left_datum.value)
-
-    var bbox = Tooltip.select("text").node().getBBox();
-    Tooltip.select("rect")
-      .attr("width", bbox.width+6)
-  }
-
-  var mouseout = function(d) {
-    Tooltip
-      .style("opacity", 0)
-    // d3.select(this)
-      // .style("stroke", "none")
-    //   .style("opacity", 0.8)
-  }
-
-  svg.append("g")
-    .attr("fill", "none")
-    .attr("pointer-events", "all")
-  .selectAll("rect")
-  .data(d3.pairs(series.series[0].values))
-  .join("rect")
-    .attr("x", ([a, b]) => x_scale(a.date))
-    .attr("height", (d) => height )
-    .attr("width", ([a, b]) => x_scale(a.date) - x_scale(b.date))
-    .on("mouseover", mouseover)
-    .on("mousemove", mousemove)
-    .on("mouseout", mouseout);
-
-}
-
-
 
 
 
