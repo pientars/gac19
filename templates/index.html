@@ -258,8 +258,6 @@ function draw_series_plot(series){
     let left_datum = d[0];
     // Hide NaN values to stop errors in transform
     Tooltip
-      .transition()
-      .duration(100)
       .attr("transform", (ser) => {
         if (!isNaN(ser.values[i].value)) {
           return "translate(" +x_scale(left_datum.date)+", "+y_scale(ser.values[i].value)+")";
@@ -279,8 +277,6 @@ function draw_series_plot(series){
 
   var mouseout = (d) => {
     Tooltip
-      .transition()
-      .duration(200)
       .style("opacity", 0)
   }
 
