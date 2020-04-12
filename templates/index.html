@@ -71,9 +71,6 @@ function draw_series_plot(series){
       .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-  // find the start date
-  // find_first_nonzero_date(vis_data, series);
-  // console.log(series);
 
   // title
   svg.append("text")
@@ -105,7 +102,7 @@ function draw_series_plot(series){
 
 
   // Y values Get max across all series, ooof ugly
-  let y_max = Math.max(...series.series.map(function(ser) {
+  let y_max = Math.max(...series.series.map((ser) => {
     return  d3.max( ser.values, (d) => isNaN(d.value) ? -1 : +d.value );
   }));
 
@@ -222,8 +219,6 @@ function draw_series_plot(series){
     .data(series.series)
     .enter()
     .append("g")
-    // .attr("transform", "translate(100,100)")
-    // .style("opacity", 1)
     .style("opacity", 0)
     .attr("class", "tooltip")
 
@@ -238,7 +233,6 @@ function draw_series_plot(series){
     Tooltip.append("rect")
       .attr("width", 60)
       .attr("height", 24)
-      // .attr("fill", "#FFF")
       .attr("fill", "#241C15")
       .attr("opacity", 0.7)
       .attr("transform", "translate(17,-12)")
@@ -262,19 +256,31 @@ function draw_series_plot(series){
 
   var mousemove = (d,i) => {
     let left_datum = d[0];
+    // Hide NaN values to stop errors in transform
     Tooltip
-      .attr("transform", (ser) => "translate(" +x_scale(left_datum.date)+", "+y_scale(ser.values[i].value)+")");
-
+      .transition()
+      .duration(100)
+      .attr("transform", (ser) => {
+        if (!isNaN(ser.values[i].value)) {
+          return "translate(" +x_scale(left_datum.date)+", "+y_scale(ser.values[i].value)+")";
+        } else {
+          return "translate(" +x_scale(left_datum.date)+", 0)";
+        }
+      })
+      .style("opacity", (ser) => (isNaN(ser.values[i].value)) ? 0.0 : 1.0);
+    // Set hover label
     Tooltip.select("text")
       .text((ser) => ser.values[i].value);
-
-    var bbox = Tooltip.selectAll("text").node().getBBox();
+    // Get the hover label width to change the card behind it
+    var bboxes = Tooltip.selectAll("text").nodes().map((nod) => nod.getBBox());
     Tooltip.select("rect")
-      .attr("width", bbox.width+6);
+      .attr("width", (ser, i) => bboxes[i].width+6);
   }
 
   var mouseout = (d) => {
     Tooltip
+      .transition()
+      .duration(200)
       .style("opacity", 0)
   }
 
@@ -440,6 +446,9 @@ let state_prefix = '13'
   </div>
   <div class="info-note"> GA population estimated from
     <a class="less-ugly-link" href="https://www.census.gov/quickfacts/GA"> Census.gov </a>
+  </div>
+  <div class="info-note"> Code/contact via github:
+    <a class="less-ugly-link" href="https://github.com/pientars/gac19"> github.com/pientars/gac19 </a>
   </div>
 </body>
 </html>
