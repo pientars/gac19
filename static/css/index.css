@@ -1,0 +1,90 @@
+body {
+  font: 15px "Open Sans", sans-serif;
+  background-color: #241C15;
+}
+.info-note {
+  font-size: 10px;
+  color: #DBD9D2;
+}
+.header-div {
+  min-height: 50px;
+  display: flex;
+  align-items:center;
+  margin-bottom: 4px;
+}
+.title {
+  display:inline;
+  font: 35px "Open Sans", sans-serif;
+  font-weight: 700;
+  color: #E7B75F;
+  margin-left: 10px;
+}
+.header-tested {
+  display:inline-block;
+  font: 30px "Open Sans", sans-serif;
+  color: #b2df8a;
+  margin: 0px 0px 12px 50px;
+}
+.header-positive {
+  display:inline-block;
+  font: 30px "Open Sans", sans-serif;
+  color: #ff9174;
+  margin: 0px 0px 12px 50px;
+}
+.header-negative {
+  display:inline-block;
+  font: 30px "Open Sans", sans-serif;
+  color: #1f78b4;
+  margin: 0px 0px 12px 50px;
+}
+.header-death {
+  display:inline-block;
+  font: 30px "Open Sans", sans-serif;
+  color: #c74c4c;
+  margin: 0px 0px 12px 50px;
+}
+.plotting-div {
+  display:inline;
+}
+
+/* 2D plots */
+.plot-container {
+  display: inline;
+}
+.axis-text {
+  font: 14px "Open Sans", sans-serif;
+  fill: #DBD9D2;
+}
+.axis-text-vert {
+  font: 14px "Open Sans", sans-serif;
+  fill: #DBD9D2;
+  cursor: pointer;
+}
+.title-text {
+  fill: #F6F6F4;
+  font-size: 20px;
+}
+.axis-light line, .axis-light path{
+  stroke: #8C8C8C;
+  cursor: pointer;
+}
+.axis-vert line, .axis-vert path{
+  stroke: #8C8C8C;
+}
+.legend {
+  fill: #DBD9D2;
+}
+
+
+a:link {
+  color: #a6cee3;
+  text-decoration: none;
+}
+a:hover {
+  color: #E7B75F;
+  text-decoration: none;
+}
+a:visited {
+  color: #cb6ad4;
+  text-decoration: none;
+}

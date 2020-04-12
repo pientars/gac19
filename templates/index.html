@@ -1,77 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
 <head>
   <meta charset="utf-8">
-  <style> /* set the CSS */
-    body {
-      font: 15px "Open Sans", sans-serif;
-      background-color: #241C15;
-    }
-    .info-note {
-      font-size: 10px;
-      color: #DBD9D2;
-    }
-    .header-div {
-      min-height: 50px;
-      display: flex;
-      align-items:center;
-    }
-    .plot-container {
-      display: inline;
-    }
-    .axis-text {
-      font: 14px "Open Sans", sans-serif;
-      fill: #DBD9D2;
-    }
-    .axis-text-vert {
-      font: 14px "Open Sans", sans-serif;
-      fill: #DBD9D2;
-      cursor: pointer;
-    }
-    .title {
-      display:inline;
-      font: 29px "Open Sans", sans-serif;
-      font-weight: 700;
-      color: #E7B75F;
-      margin-left: 10px;
-    }
-    .title-text {
-      fill: #F6F6F4;
-      font-size: 20px;
-    }
-    .axis-light line, .axis-light path{
-      stroke: #8C8C8C;
-      cursor: pointer;
-
-    }
-    .axis-vert line, .axis-vert path{
-      stroke: #8C8C8C;
-    }
-    .legend {
-      fill: #DBD9D2;
-    }
-    .tooltip {
-      -webkit-box-shadow: 2px 2px 1px 1px rgba(0,0,0,0.18);
-      -moz-box-shadow: 2px 2px 1px 1px rgba(0,0,0,0.18);
-      box-shadow: 2px 2px 1px 1px rgba(0,0,0,0.18);
-    }
-
-  </style>
-
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
+
 <body>
 <div class="header-div">
   <img style="vertical-align:middle" src="{{url_for('static', filename='ga.png')}}">
   <span class="title"> Dirty South Rona Stats </span>
 </div>
+<div class="header-tested"> Tested Loading...</div>
+<div class="header-positive"> Positive Loading...</div>
+<div class="header-negative"> Negative Loading...</div>
+<div class="header-death"> Deaths Loading...</div>
 
 
-<div id='my_dataviz'></div>
+<div class="plotting-div" id='plotting_div'></div>
 <script src="https://d3js.org/topojson.v3.min.js"></script>
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script>
 
+const pop_ga = 10617423,
+      pop_us = 331002651;
 
 var vis_data =  JSON.parse('{{ vis_data | tojson }}');
 var topo_json =  JSON.parse('{{ topo_json | tojson }}');
@@ -103,11 +55,11 @@ var margin = {top: 20, right:100, bottom: 40, left: 60},
     width = 900 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-let colors = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#c74c4c'];
+let colors = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#c74c4c', '#ff9174'];
 
 function draw_series_plot(series){
   // append the svg object to the body of the page
-  var parent_div = d3.select("#my_dataviz")
+  var parent_div = d3.select("#plotting_div")
     .append("div")
       .attr("class", "plot-container")
 
@@ -309,7 +261,6 @@ function draw_series_plot(series){
 
   var mousemove = (d,i) => {
     let left_datum = d[0];
-    console.log(d,i);
     Tooltip
       .attr("transform", (ser) => "translate(" +x_scale(left_datum.date)+", "+y_scale(ser.values[i].value)+")");
 
@@ -341,64 +292,30 @@ function draw_series_plot(series){
 
 }
 
-// Here I riff on the full data to make some individual plots
-full_series = [ {'title': 'GA: Positive, Negative, Tested',
-                 'log_y':false,
-                 'series':[{'name':'Positive',
-                            'location':'ga',
-                            'color':0,
-                            'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive}; }),
-                            'desc':'Positive Cases'},
-                          {'name':'Negative',
-                           'location':'ga',
-                           'color':1,
-                           'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.negative}; }),
-                           'desc':'Negative Cases'},
-                          {'name':'Tested',
-                           'location':'ga',
-                           'color':2,
-                           'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.tested}; }),
-                           'desc':'People Tested'}]},
-                {'title': 'US Positive, GA Positive ',
-                'log_y':false,
-                 'series':[{'name':'Positive (US)',
-                            'location':'us',
-                            'color':0,
-                            'values': vis_data['us'].map((d) => { return { "date":d.date, "value":d.positive}; }),
-                            'desc':'Positive Cases (US)'},
-                            {'name':'Positive (GA)',
-                            'location':'ga',
-                            'color':2,
-                            'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive}; }),
-                            'desc':'Positive Cases'}]},
-                {'title': 'GA: Positive, Death',
-                'log_y':false,
-                 'series':[{'name':'Positive',
-                            'location':'ga',
-                            'color':0,
-                            'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive}; }),
-                            'desc':'Positive Cases'},
-                           {'name':'Deaths',
-                            'location':'ga',
-                            'color':4,
-                            'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.death}; }),
-                            'desc':'Deaths'},]},
-                {'title': 'Change in Daily Positive Cases US vs GA ',
-                'log_y':false,
-                 'series':[{'name':'dPos/dt (US)',
-                            'location':'us',
-                            'color':0,
-                            'values': vis_data['us'].map((d) => { return { "date":d.date, "value":d.positive_diff}; }),
-                            'desc':'Daily change in US positive cases'},
-                           {'name':'dPos/dt (GA)',
-                            'location':'ga',
-                            'color':1,
-                            'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive_diff}; }),
-                            'desc':'Daily change in GA positive cases'}]},
-];
 
-full_series.forEach(function(ser) { draw_series_plot(ser) });
+function draw_header(vis_data) {
+  let ga_test = vis_data['ga'][0]['tested'];
+  let ga_test_per = (ga_test / pop_ga * 100).toFixed(3)
+  d3.select(".header-tested")
+  .text("Tested " + format_number_commas(ga_test)  + " (" + ga_test_per +"%)" );
+  let ga_pos = vis_data['ga'][0]['positive'];
+  let ga_pos_per = (ga_pos / pop_ga * 100).toFixed(3)
+  d3.select(".header-positive")
+    .text("Positive " + format_number_commas(ga_pos)  + " (" + ga_pos_per +"%)" );
+  let ga_neg = vis_data['ga'][0]['negative'];
+  let ga_neg_per = (ga_neg / pop_ga * 100).toFixed(3)
+  d3.select(".header-negative")
+    .text("Negative " + format_number_commas(ga_neg)  + " (" + ga_neg_per +"%)" );
+  let ga_death = vis_data['ga'][0]['death'];
+  let ga_death_per = (ga_death / pop_ga * 100).toFixed(3)
+  d3.select(".header-death")
+    .text("Dead " + format_number_commas(ga_death)  + " (" + ga_death_per +"%)" );
+}
 
+
+function format_number_commas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 
 function draw_counties(us, state_prefix) {
@@ -410,7 +327,7 @@ function draw_counties(us, state_prefix) {
   var path = d3.geoPath()
       .projection(projection);
 
-  var svg = d3.select("#my_dataviz")
+  var svg = d3.select("#plotting_div")
     .append("div")
       .attr("class", "plot-container")
     .append("svg")
@@ -443,13 +360,85 @@ function draw_counties(us, state_prefix) {
     .attr("d", path);
 }
 
+/////////////////////////// Draw all the things!
+draw_header(vis_data);
+// Here I riff on the full data to make some individual plots
+full_series = [ {'title': 'GA: Positive, Negative, Tested',
+                 'log_y':false,
+                 'series':[{'name':'Positive',
+                            'location':'ga',
+                            'color':5,
+                            'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive}; }),
+                            'desc':'Positive Cases'},
+                          {'name':'Negative',
+                           'location':'ga',
+                           'color':1,
+                           'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.negative}; }),
+                           'desc':'Negative Cases'},
+                          {'name':'Tested',
+                           'location':'ga',
+                           'color':2,
+                           'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.tested}; }),
+                           'desc':'People Tested'}]},
+                {'title': 'US Positive, GA Positive ',
+                'log_y':false,
+                 'series':[{'name':'Positive (US)',
+                            'location':'us',
+                            'color':0,
+                            'values': vis_data['us'].map((d) => { return { "date":d.date, "value":d.positive}; }),
+                            'desc':'Positive Cases (US)'},
+                            {'name':'Positive (GA)',
+                            'location':'ga',
+                            'color':5,
+                            'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive}; }),
+                            'desc':'Positive Cases'}]},
+                {'title': 'GA: Positive, Death',
+                'log_y':false,
+                 'series':[{'name':'Positive',
+                            'location':'ga',
+                            'color':5,
+                            'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive}; }),
+                            'desc':'Positive Cases'},
+                           {'name':'Deaths',
+                            'location':'ga',
+                            'color':4,
+                            'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.death}; }),
+                            'desc':'Deaths'},]},
+                {'title': 'Change in Daily Positive Cases US vs GA ',
+                'log_y':false,
+                 'series':[{'name':'dPos/dt (US)',
+                            'location':'us',
+                            'color':0,
+                            'values': vis_data['us'].map((d) => { return { "date":d.date, "value":d.positive_diff}; }),
+                            'desc':'Daily change in US positive cases'},
+                           {'name':'dPos/dt (GA)',
+                            'location':'ga',
+                            'color':5,
+                            'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive_diff}; }),
+                            'desc':'Daily change in GA positive cases'}]},
+];
+full_series.forEach((ser) => draw_series_plot(ser));
+
+
+
 let state_prefix = '13'
 // draw_counties(topo_json, state_prefix);
 
 
-</script>
 
-<div class="info-note"> US population estimated from https://www.worldometers.info/</div>
-<div class="info-note"> GA population estimated from https://www.census.gov/quickfacts/GA</div>
+
+</script>
+  <div class="info-note"> Data from:
+    <a class="less-ugly-link" href="https://dph.georgia.gov/.com/"> GA Department of Public Health </a>
+  </div>
+  <div class="info-note"> Data from:
+    <a class="less-ugly-link" href="https://www.covidtracking.com/"> Covid Tracking </a>
+  </div>
+  <div class="info-note"> US population estimated from
+    <a class="less-ugly-link" href="https://www.worldometers.info/"> Worldmeter's Projection </a>
+  </div>
+  <div class="info-note"> GA population estimated from
+    <a class="less-ugly-link" href="https://www.census.gov/quickfacts/GA"> Census.gov </a>
+  </div>
 </body>
 </html>
