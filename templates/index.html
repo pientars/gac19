@@ -13,6 +13,7 @@
       color: #DBD9D2;
     }
     .header-div {
+      min-height: 50px;
       display: flex;
       align-items:center;
     }
@@ -50,6 +51,11 @@
     .legend {
       fill: #DBD9D2;
     }
+    .tooltip {
+      -webkit-box-shadow: 2px 2px 1px 1px rgba(0,0,0,0.18);
+      -moz-box-shadow: 2px 2px 1px 1px rgba(0,0,0,0.18);
+      box-shadow: 2px 2px 1px 1px rgba(0,0,0,0.18);
+    }
 
   </style>
 
@@ -65,8 +71,12 @@
 <script src="https://d3js.org/topojson.v3.min.js"></script>
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script>
+
+
 var vis_data =  JSON.parse('{{ vis_data | tojson }}');
 var topo_json =  JSON.parse('{{ topo_json | tojson }}');
+
+var datetime_to_str = d3.timeFormat("%m/%d/%Y");
 
 locations = ['us', 'ga'];
 
@@ -97,10 +107,11 @@ let colors = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#c74c4c'];
 
 function draw_series_plot(series){
   // append the svg object to the body of the page
-  var svg = d3.select("#my_dataviz")
+  var parent_div = d3.select("#my_dataviz")
     .append("div")
       .attr("class", "plot-container")
-    .append("svg")
+
+  var svg =  parent_div.append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -199,9 +210,10 @@ function draw_series_plot(series){
 
   // Begin drawing content
   var line = d3.line()
+    .curve(d3.curveBasis)
     .defined(d => !isNaN(d.value) && d.value > 0  )
     .x( (d) => x_scale(d.date))
-    .y( (d) =>  y_scale(d.value));
+    .y( (d) =>  y_scale(d.value))
 
   var ser = svg.selectAll(".city")
     .data(series.series)
@@ -210,7 +222,7 @@ function draw_series_plot(series){
       .attr("class", "series");
 
   ser.append("path")
-    .attr("class", "plot-line")
+    .attr("class", "plot-line line")
     .attr("fill", "none")
     .attr("stroke", (d) => colors[d.color])
     .attr("stroke-width", 1.5)
@@ -218,10 +230,12 @@ function draw_series_plot(series){
 
   ser.append("text")
     .datum((d) => {
-      return { name: d.name, value: d.values[0], color: d.color };
+      return { name: d.name,
+               value: d.values[0],
+               color: d.color };
     })
     .attr("class", "plot-text")
-    .attr("transform", (d) =>  "translate(" + x_scale(d.value.date) + "," + y_scale(d.value.value) + ")")
+    .attr("transform", (d) =>  "translate(" + (x_scale(d.value.date)+3) + "," + y_scale(d.value.value) + ")")
     .attr("x", 3)
     .attr("dy", ".35em")
     .attr("fill",(d) => colors[d.color])
@@ -250,6 +264,7 @@ function draw_series_plot(series){
 
   // Mouse hover lines and events
   mouse_hover(svg, series, x_scale, y_scale);
+
 }
 
 // Here I riff on the full data to make some individual plots
@@ -260,17 +275,17 @@ full_series = [ {'title': 'GA: Positive, Negative, Tested',
                             'color':0,
                             'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.positive}; }),
                             'desc':'Positive Cases'},
-]}]
-                          // {'name':'Negative',
-                          //  'location':'ga',
-                          //  'color':1,
-                          //  'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.negative}; }),
-                          //  'desc':'Negative Cases'},
-                          // {'name':'Tested',
-                          //  'location':'ga',
-                          //  'color':2,
-                          //  'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.tested}; }),
-                          //  'desc':'People Tested'}]},
+                          {'name':'Negative',
+                           'location':'ga',
+                           'color':1,
+                           'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.negative}; }),
+                           'desc':'Negative Cases'},
+                          {'name':'Tested',
+                           'location':'ga',
+                           'color':2,
+                           'values': vis_data['ga'].map((d) => { return { "date":d.date, "value":d.tested}; }),
+                           'desc':'People Tested'}]},
+    ];
 //                 {'title': 'US Positive, GA Positive ',
 //                 'log_y':false,
 //                  'series':[{'name':'Positive (US)',
@@ -313,109 +328,89 @@ full_series.forEach(function(ser) { draw_series_plot(ser) });
 
 
 function mouse_hover(svg, series, x_scale, y_scale) {
-  var mouseG = svg.append("g")
-    .attr("class", "mouse-over-effects");
 
-  mouseG.append("path") // this is the black vertical line to follow mouse
-    .attr("class", "mouse-line")
-    .style("stroke", "white")
-    .style("stroke-width", "1px")
-    .style("opacity", "0.1");
+  // series.series.forEach((ser, i) => {
+  //
+  // })
 
-  // var lines = svg.selectAll('.plot-line');
-  var lines = document.getElementsByClassName('plot-line')
-  console.log(lines);
+  var Tooltip = svg.append("g")
+    .attr("transform", "translate(100,100)")
+    .style("opacity", 1)
+    .attr("class", "tooltip")
+
+    Tooltip.append('circle')
+      .attr("cx", 0)
+      .attr("cy", 0)
+      .attr("r", 5)
+      .attr("fill", "none")
+      .attr("stroke-width", 1)
+      .attr("stroke", colors[0]);
+
+    Tooltip.append("rect")
+      .attr("width", 60)
+      .attr("height", 24)
+      // .attr("fill", "#FFF")
+      .attr("fill", "#241C15")
+      .attr("opacity", 0.7)
+      .attr("transform", "translate(17,-12)")
+
+    Tooltip.append("line")
+      .attr("x1", 6)
+      .attr("y1", 0)
+      .attr("x2", 16)
+      .attr("y2", 0)
+      .attr("stroke", colors[0]);
 
 
-  var mousePerLine = mouseG.selectAll('.mouse-per-line')
-    .data(series.series)
-    .enter()
-    .append("g")
-    .attr("class", "mouse-per-line");
+    Tooltip.append('text')
+      .attr("transform", "translate(20,5)")
+      .attr("fill", colors[0])
+      .text("1887")
 
-  mousePerLine.append("circle")
-    .attr("r", 7)
-    .style("stroke", (d) => colors[d.color])
-    .style("fill", "none")
-    .style("stroke-width", "1px")
-    .style("opacity", "0");
 
-  mousePerLine.append("text")
-    .attr("transform", "translate(10,3)");
+  var mouseover = function(d) {
+    Tooltip
+      .style("opacity", 1)
+    // d3.select(this)
+      // .style("stroke", "black")
+    //   .style("opacity", 1)
+  }
 
-  mouseG.append('svg:rect') // append a rect to catch mouse movements on canvas
-    .attr('width', width) // can't catch mouse events on a g element
-    .attr('height', height)
-    .attr('fill', 'none')
-    .attr('pointer-events', 'all')
-    .on('mouseout', function() { // on mouse out hide line, circles and text
-      d3.select(".mouse-line")
-        .style("opacity", "0");
-      d3.selectAll(".mouse-per-line circle")
-        .style("opacity", "0");
-      d3.selectAll(".mouse-per-line text")
-        .style("opacity", "0");
-    })
-    .on('mouseover', function() { // on mouse in show line, circles and text
-      d3.select(".mouse-line")
-        .style("opacity", "0.1");
-      d3.selectAll(".mouse-per-line circle")
-        .style("opacity", "1");
-      d3.selectAll(".mouse-per-line text")
-        .style("opacity", "1");
-    })
-    .on('mousemove', function() { // mouse moving over canvas
-      var mouse = d3.mouse(this);
-      d3.select(".mouse-line")
-        .attr("d", function() {
-          var d = "M" + mouse[0] + "," + height;
-          d += " " + mouse[0] + "," + 0;
-          return d;
-        });
+  var mousemove = function(d) {
+    let left_datum = d[0];
+    Tooltip
+      .attr("transform", "translate(" +x_scale(left_datum.date)+", "+y_scale(left_datum.value)+")")
 
-      d3.selectAll(".mouse-per-line")
-        .attr("transform", function(d, i) {
-          // console.log(width/mouse[0]);
-          var beginning = 0,
-              end = lines[i].getTotalLength(),
-              target = null;
+    Tooltip.select("text")
+      .text(left_datum.value)
 
-          console.log(mouse[0], end, beginning);
+    var bbox = Tooltip.select("text").node().getBBox();
+    Tooltip.select("rect")
+      .attr("width", bbox.width+6)
+  }
 
-          while (true){
-            target = Math.floor((beginning + end) / 2);
-            pos = lines[i].getPointAtLength(target);
-            
-            if ((target === end || target === beginning) && pos.x !== mouse[0]) {
-              console.log('broke edge');
-                break;
-            }
-            if (pos.x > mouse[0]) end = target;
-            else if (pos.x < mouse[0]) beginning = target;
-            else {
-              console.log('opt found');
-              break;
-            } //position found
-          }
+  var mouseout = function(d) {
+    Tooltip
+      .style("opacity", 0)
+    // d3.select(this)
+      // .style("stroke", "none")
+    //   .style("opacity", 0.8)
+  }
 
-          d3.select(this).select('text')
-            .text(y_scale.invert(pos.y).toFixed(2));
-
-          return "translate(" + mouse[0] + "," + pos.y +")";
-        });
-        // console.log(pos.y);
-    }); //mousemove
+  svg.append("g")
+    .attr("fill", "none")
+    .attr("pointer-events", "all")
+  .selectAll("rect")
+  .data(d3.pairs(series.series[0].values))
+  .join("rect")
+    .attr("x", ([a, b]) => x_scale(a.date))
+    .attr("height", (d) => height )
+    .attr("width", ([a, b]) => x_scale(a.date) - x_scale(b.date))
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseout", mouseout);
 
 }
-function find_first_nonzero_date(vis_data, series){
-    series.series.forEach( function (ser, i) {
-      var index = vis_data.findIndex(val => val[ser.vals_key] < 1)
-      ser['nonzero_date'] = index;
-    })
-}
-
-
-
 
 
 
@@ -465,8 +460,6 @@ function draw_counties(us, state_prefix) {
 
 let state_prefix = '13'
 // draw_counties(topo_json, state_prefix);
-
-
 
 
 </script>
