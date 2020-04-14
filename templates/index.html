@@ -30,7 +30,7 @@ const pop_ga = 10617423,
 var vis_data =  JSON.parse('{{ vis_data | tojson }}');
 var topo_json =  JSON.parse('{{ topo_json | tojson }}');
 
-var datetime_to_str = d3.timeFormat("%m/%d/%Y");
+var datetime_to_str = d3.timeFormat("%m-%d");
 
 locations = ["us", "ga"];
 
@@ -252,17 +252,40 @@ function draw_series_plot(series){
       .attr("fill", (d) => colors[d.color])
       .text("1887")
 
+
+    svg.append("rect")
+      .attr("class", "tooltip-date-rect")
+      .attr("width", 50)
+      .attr("height", 16)
+      .style("opacity", 1)
+      .attr("fill", "#241C15");
+
+    svg.append("text")
+      .attr("class", "tooltip-date axis-text")
+      .attr("dx", "-.8em")
+      .attr("dy", ".15em")
+      .attr("text-anchor", "end")
+      // .attr("transform", "translate(0,"+(height-margin.top)+")")
+      .style("opacity", 1)
+      .text("Loading");
+
   var mouseover = (d) => {
     Tooltip
-      .style("opacity", 1)
+      .style("opacity", 1);
+    svg.select(".tooltip-date-rect")
+      .style("opacity", 1);
+    svg.select(".tooltip-date")
+      .style("opacity", 1);
   }
 
   var mousemove = (d,i) => {
+    // console.log(d);
     let left_datum = d[0];
     // Hide NaN values to stop errors in transform
+    var y_val = 0;
     Tooltip
       .attr("transform", (ser) => {
-        let y_val = y_scale(ser.values[i].value);
+        y_val = y_scale(ser.values[i].value);
         if (!isNaN(ser.values[i].value) &&  !isNaN(y_val)) {
           return "translate(" +x_scale(left_datum.date)+", "+y_val+")";
         } else {
@@ -277,11 +300,21 @@ function draw_series_plot(series){
     var bboxes = Tooltip.selectAll("text").nodes().map((nod) => nod.getBBox());
     Tooltip.select("rect")
       .attr("width", (ser, i) => bboxes[i].width+6);
+
+    svg.select(".tooltip-date-rect")
+      .attr("transform", "translate("+(x_scale(left_datum.date)-50)+","+(height-margin.top+33)+") rotate(-35)");
+    svg.select(".tooltip-date")
+      .attr("transform", "translate("+(x_scale(left_datum.date)+5)+","+(height-margin.top+8)+") rotate(-35)")
+      .text(datetime_to_str(d[0].date));
   }
 
   var mouseout = (d) => {
     Tooltip
       .style("opacity", 0)
+    svg.select(".tooltip-date-rect")
+      .style("opacity", 0);
+    svg.select(".tooltip-date")
+      .style("opacity", 0);
   }
 
   svg.append("g")
