@@ -55,19 +55,19 @@ def filter_data(state_data, us_data, daily_cache_file ):
   us_positive_diff = np.zeros(merged_df.shape[0],)
   ga_positive_diff = np.zeros(merged_df.shape[0],)
   # We will be off by one in length, skip that last one.
-  us_positive_diff[:-1] = -1 * np.diff(merged_df['positive_us'].to_numpy())
-  ga_positive_diff[:-1] = -1 * np.diff(merged_df['positive'].to_numpy())
+  us_positive_diff[:-1] = np.absolute(np.diff(merged_df['positive_us'].to_numpy()))
+  ga_positive_diff[:-1] = np.absolute(np.diff(merged_df['positive'].to_numpy()))
   merged_df['positive_diff_us'] = us_positive_diff
   merged_df['positive_diff'] = ga_positive_diff
 
+  # Calculate rolling averages
+  merged_df['positive_diff_us_ma'] = merged_df['positive_diff_us'].iloc[::-1].rolling(window=3).mean().iloc[::-1]
+  merged_df['positive_diff_ma'] = merged_df['positive_diff'].iloc[::-1].rolling(window=3).mean().iloc[::-1]
 
-  # Calculate normalized
-  # us_pop = 331.002651
-  # ga_pop = 10.617423
-  # merged_df['positive_us_pop_norm'] = merged_df['positive_us'].map(lambda x: x/us_pop)
-  # merged_df['positive_ga_pop_norm'] = merged_df['positive_us'].map(lambda x: x/ga_pop)
+  # Use string of NaN which we will use in JS for float NaNs
   merged_df.fillna('NaN', inplace=True)
 
+  # Package data into a d3-friendly version
   final_data = {'us':[], 'ga':[]}
   for index, row in merged_df.iterrows():
     final_data['us'].append({'date':int(row['date']),
@@ -76,7 +76,8 @@ def filter_data(state_data, us_data, daily_cache_file ):
                              'tested':row['totalTestResults_us'],
                              'hospitalized':row['hospitalized_us'],
                              'death':row['death_us'],
-                             'positive_diff':row['positive_diff_us']})
+                             'positive_diff':row['positive_diff_us'],
+                             'positive_diff_ma':row['positive_diff_us_ma']})
 
     final_data['ga'].append({'date':int(row['date']),
                              'positive':row['positive'],
@@ -84,11 +85,15 @@ def filter_data(state_data, us_data, daily_cache_file ):
                              'tested':row['totalTestResults'],
                              'hospitalized':row['hospitalized'],
                              'death':row['death'],
-                             'positive_diff':row['positive_diff']})
+                             'positive_diff':row['positive_diff'],
+                             'positive_diff_ma':row['positive_diff_ma']})
 
 
   # Cache file
   json.dump(final_data, open(daily_cache_file, 'w'))
+
+
+
 
 def load_county_data():
   county_df = pd.read_csv('data/ga_county_data.csv')
