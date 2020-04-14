@@ -8,19 +8,20 @@
 </head>
 
 <body>
-<div class="header-div">
-  <img style="vertical-align:middle" src="{{url_for('static', filename='ga.png')}}">
-  <span class="title"> Dirty South Rona Stats </span>
-</div>
-<div class="header-tested"> Tested Loading...</div>
-<div class="header-positive"> Positive Loading...</div>
-<div class="header-negative"> Negative Loading...</div>
-<div class="header-death"> Deaths Loading...</div>
+  <div class="header-div">
+    <img style="vertical-align:middle" src="{{url_for('static', filename='ga.png')}}">
+    <span class="title"> Dirty South Rona Stats </span>
+  </div>
+  <div class="full-width">
+  <div class="header-tested"> Tested Loading...</div>
+  <div class="header-positive"> Positive Loading...</div>
+  <div class="header-negative"> Negative Loading...</div>
+  <div class="header-death"> Deaths Loading...</div>
+  </div>
 
-
-<div class="plotting-div" id='plotting_div'></div>
-<script src="https://d3js.org/topojson.v3.min.js"></script>
-<script src="https://d3js.org/d3.v5.min.js"></script>
+  <div class="plotting-div" id='plotting_div'></div>
+  <script src="https://d3js.org/topojson.v3.min.js"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
 <script>
 
 const pop_ga = 10617423,
@@ -426,10 +427,6 @@ full_series.forEach((ser) => draw_series_plot(ser));
 
 let state_prefix = '13'
 // draw_counties(topo_json, state_prefix);
-
-
-
-
 </script>
   <div class="info-note"> Data from:
     <a class="less-ugly-link" href="https://dph.georgia.gov/.com/"> GA Department of Public Health </a>
