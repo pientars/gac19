@@ -257,7 +257,7 @@ function draw_series_plot(series){
       .attr("class", "tooltip-date-rect")
       .attr("width", 50)
       .attr("height", 16)
-      .style("opacity", 1)
+      .style("opacity", 0)
       .attr("fill", "#241C15");
 
     svg.append("text")
@@ -265,7 +265,7 @@ function draw_series_plot(series){
       .attr("dx", "-.8em")
       .attr("dy", ".15em")
       .attr("text-anchor", "end")
-      .style("opacity", 1)
+      .style("opacity", 0)
       .text("Loading");
 
   var mouseover = (d) => {
