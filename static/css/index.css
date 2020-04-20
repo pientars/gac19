@@ -51,14 +51,27 @@ body {
 .plot-container {
   display: inline;
 }
+.plot-container-full {
+  width: 100%;
+  /* display: block; */
+  /* margin: auto; */
+}
+.centered-svg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 .axis-text {
-  font: 14px "Open Sans", sans-serif;
+  font: 16px "Open Sans", sans-serif;
   fill: #DBD9D2;
 }
 .axis-text-vert {
-  font: 14px "Open Sans", sans-serif;
+  font: 16px "Open Sans", sans-serif;
   fill: #DBD9D2;
   cursor: pointer;
+}
+.plot-text {
+  font: 16px "Open Sans", sans-serif;
 }
 .title-text {
   fill: #F6F6F4;

@@ -22,17 +22,24 @@
   <div class="plotting-div" id="plotting_div"></div>
   <script src="https://d3js.org/topojson.v3.min.js"></script>
   <script src="https://d3js.org/d3.v5.min.js"></script>
-<script>
 
+<script>
 const pop_ga = 10617423,
       pop_us = 331002651;
 
 var vis_data =  JSON.parse('{{ vis_data | tojson }}');
 var topo_json =  JSON.parse('{{ topo_json | tojson }}');
+var county_data =  JSON.parse('{{ county_json | tojson }}');
 
 var datetime_to_str = d3.timeFormat("%m-%d");
 
 locations = ["us", "ga"];
+
+// Construct a map of countyID to dataset
+county_map = {}
+county_data.forEach((county, i) => {
+  county_map[String(county.countyFIPS)] = county;
+});
 
 // Turn date strings into dates
 locations.forEach( function(location, i){
@@ -50,6 +57,8 @@ locations.forEach( function(location, i){
 
 // console.log(vis_data);
 // console.log(topo_json);
+// console.log(county_map);
+
 
 // set the dimensions and margins of the graph
 var margin = {top: 20, right:100, bottom: 40, left: 60},
@@ -361,15 +370,24 @@ function draw_counties(us, state_prefix) {
   var width = 900,
     height = 800;
 
-  projection = d3.geoAlbersUsa().scale(9000).translate([-1150,-400])
+  // var county_colors = d3.scaleQuantize([1, 1000], d3.schemeBlues[9]);
+  var county_colors = d3.scaleSequential()
+    .domain([0, 1000])
+    .interpolator(d3.interpolateViridis);
+  var cur_date = "4/17/20";
+
+  projection = d3.geoAlbersUsa().scale(9000).translate([-1250,-400]);
+
+
 
   var path = d3.geoPath()
       .projection(projection);
 
   var svg = d3.select("#plotting_div")
     .append("div")
-      .attr("class", "plot-container")
+      .attr("class", "plot-container-full")
     .append("svg")
+      .attr("class", "centered-svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
 
@@ -378,7 +396,13 @@ function draw_counties(us, state_prefix) {
     .selectAll("path")
     .data(topojson.feature(us, us.objects.counties).features)
       .join("path")
-      .attr("fill", d => d.id.startsWith("13") ? "#DBD9D2": "#403B3B")
+      .attr("fill", d => {
+        if (d.id in county_map) {
+          return county_colors(county_map[d.id][cur_date]);
+        } else {
+          return d.id.startsWith("13") ? "#DBD9D2": "#2e2c29";
+        }
+      })
       .attr("d", path);
 
   // black county lines
@@ -397,6 +421,47 @@ function draw_counties(us, state_prefix) {
     .attr("stroke", "white")
     .attr("stroke-linejoin", "round")
     .attr("d", path);
+
+  // legend
+
+  let num_segs = 20,
+      max_positive = 1000,
+      rect_height = Math.floor((height + margin.top)/num_segs),
+      rect_width = 30;
+  let legend_range = d3.range(0, max_positive, Math.floor(max_positive/num_segs)).reverse();
+
+  svg.append("rect")
+    .attr("x", width+margin.left+margin.right-185)
+    .attr("width", 185)
+    .attr("height", height+margin.left+margin.right)
+    .attr("fill", "#241C15")
+    .style("opacity", 0.9)
+
+  svg.append("text")
+    .attr("class", "title-text")
+    .attr("x", width+margin.left+margin.right-178)
+    .attr("y", rect_height/2)
+    .attr("dy", "0.5em")
+    .text("Positive Daily Cases")
+
+  var legendo = svg.selectAll("legend_rect")
+    .data(legend_range)
+    .enter()
+    .append("g")
+    .attr("transform", (d,i) => "translate("+(width+margin.left+margin.right-109)+","+((i+1)*rect_height)+")")
+
+  legendo.append("rect")
+    .attr("width", rect_width)
+    .attr("height", rect_height)
+    .attr("fill", (d,i) => county_colors(d))
+
+  legendo.append("text")
+    .attr("class", "axis-text")
+    .attr("dy", "0.5em")
+    .attr("x", rect_width*1.3)
+    .attr("y", rect_height/2)
+    .text((d) => d)
+
 }
 
 /////////////////////////// Draw all the things!
@@ -475,7 +540,9 @@ full_series.forEach((ser) => draw_series_plot(ser));
 
 
 let state_prefix = "13"
-// draw_counties(topo_json, state_prefix);
+draw_counties(topo_json, state_prefix);
+
+
 </script>
   <div class="info-note"> Data from:
     <a class="less-ugly-link" href="https://dph.georgia.gov/.com/"> GA Department of Public Health </a>
