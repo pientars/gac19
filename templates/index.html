@@ -378,18 +378,21 @@ function draw_counties(us, state_prefix) {
 
   projection = d3.geoAlbersUsa().scale(9000).translate([-1250,-400]);
 
-
-
   var path = d3.geoPath()
       .projection(projection);
 
-  var svg = d3.select("#plotting_div")
+  var map_div = d3.select("#plotting_div")
     .append("div")
-      .attr("class", "plot-container-full")
-    .append("svg")
+      .attr("class", "plot-container-full");
+
+  var svg = map_div.append("svg")
       .attr("class", "centered-svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
+    .on('mouseout', function(d,i) {
+      d3.select(".map-tooltip")
+        .style("opacity", 0);
+    })
 
   // Counties...
   svg.append("g")
@@ -403,15 +406,40 @@ function draw_counties(us, state_prefix) {
           return d.id.startsWith("13") ? "#DBD9D2": "#2e2c29";
         }
       })
-      .attr("d", path);
-
-  // black county lines
-  svg.append("path")
-    .datum(topojson.mesh(us, us.objects.counties, (a, b) => a !== b))
-    .attr("fill", "none")
-    .attr("stroke", "#241C15")
-    .attr("stroke-linejoin", "round")
-    .attr("d", path);
+      .attr("stroke", "#241C15")
+      .attr("d", path)
+      .on('mouseover', function(d,i) {
+        // Highlight county
+        d3.select(this)
+          .attr("stroke-width", 2)
+          .attr("stroke", colors[0])
+          .raise();
+        // Tooltip stuff
+        if (d.id in county_map) {
+          var centroid = path.centroid(d);
+          let tooly_cooly = d3.select(".map-tooltip");
+          // Set new values first before resize/showing
+          tooly_cooly.select(".map-tooltip-county")
+            .text(d.properties.name);
+          tooly_cooly.select(".map-tooltip-date")
+            .text(cur_date);
+          tooly_cooly.select(".map-tooltip-count")
+            .text(county_map[d.id][cur_date]);
+          // Calc new sizes
+          var max_bbox = Math.max(...tooly_cooly.selectAll("text").nodes().map((nod) => nod.getBBox().width)) + 20;
+          tooly_cooly
+            .style("opacity", 1)
+            .attr("transform", "translate("+centroid[0]+","+centroid[1]+")");
+          tooly_cooly.select("rect")
+            .attr("width", max_bbox);
+        }
+      })
+      .on('mouseout', function(d,i) {
+        d3.select(this)
+          .attr("stroke", "#241C15")
+          .attr("stroke-width", 1)
+          .raise();
+        });
 
   // white lines
   svg.append("path")
@@ -420,10 +448,23 @@ function draw_counties(us, state_prefix) {
     .attr("stroke-width", "2px")
     .attr("stroke", "white")
     .attr("stroke-linejoin", "round")
+    .attr("pointer-events", "none")
     .attr("d", path);
 
-  // legend
+  ////// Title
+  svg.append("rect")
+    .attr("width", 310)
+    .attr("height", 30)
+    .attr("fill", "#241C15")
+    .style("opacity", 0.9)
 
+  svg.append("text")
+    .attr("class", "title-text")
+    .attr("y", 10)
+    .attr("dy", "0.5em")
+    .text("GA Positive Daily Cases Over Time")
+
+  ////// legend
   let num_segs = 20,
       max_positive = 1000,
       rect_height = Math.floor((height + margin.top)/num_segs),
@@ -461,6 +502,51 @@ function draw_counties(us, state_prefix) {
     .attr("x", rect_width*1.3)
     .attr("y", rect_height/2)
     .text((d) => d)
+
+  ////// Tooltip
+  let tt_rect_start = 20,
+      tt_rect_height = 90,
+      tt_rect_pad = 14;
+
+  var tooly_cooly = svg.append("g")
+    .attr("class", "map-tooltip")
+    .attr("pointer-events", "none")
+    // .style("opacity", 0);
+
+  tooly_cooly.append("polygon")
+    .attr("points", "0,0 21,-5 21,5")
+    .attr("fill", "#4a433f")
+
+  tooly_cooly.append("rect")
+    .attr("width", 100)
+    .attr("height", tt_rect_height)
+    .attr("x", tt_rect_start)
+    .attr("y", -tt_rect_height/2)
+    .attr("fill", "#4a433f")
+
+  tooly_cooly.append("text")
+    .attr("class", "map-tooltip-county")
+    .attr("x", tt_rect_start+10)
+    .attr("y", -tt_rect_height/2 + tt_rect_pad)
+    .attr("dy", "0.5em")
+    .text("Loading");
+
+  tooly_cooly.append("text")
+    .attr("class", "map-tooltip-date")
+    .attr("x", tt_rect_start+10)
+    .attr("y", -tt_rect_height/2 + tt_rect_height/3 + tt_rect_pad)
+    .attr("dy", "0.5em")
+    .text("Loading");
+
+  tooly_cooly.append("text")
+    .attr("class", "map-tooltip-count")
+    .attr("x", tt_rect_start+10)
+    .attr("y", -tt_rect_height/2 + tt_rect_height*2/3 + tt_rect_pad)
+    .attr("dy", "0.5em")
+    .text("Loading");
+
+
+
 
 }
 

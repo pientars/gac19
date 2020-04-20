@@ -87,6 +87,19 @@ body {
 .legend {
   fill: #DBD9D2;
 }
+/* Choropleth */
+.map-tooltip-county {
+  fill: #ff9174;
+  font: 18px "Open Sans", sans-serif;
+}
+.map-tooltip-count {
+  fill: #DBD9D2;
+  font: 16px "Open Sans", sans-serif;
+}
+.map-tooltip-date {
+  fill: #DBD9D2;
+  font: 16px "Open Sans", sans-serif;
+}
 
 
 a:link {
