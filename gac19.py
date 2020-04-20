@@ -1,9 +1,11 @@
 import datetime as dt
 from flask import Flask, render_template
+import io
 import json
 import numpy as np
 from os.path import isfile
 import pandas as pd
+import pickle
 from pandas.io.json import json_normalize
 import requests
 
@@ -14,7 +16,7 @@ app = Flask(__name__)
 def index():
 
   date = str(dt.date.today())
-  daily_cache_file = 'gac19_' + date +'.json'
+  daily_cache_file = "data/gac19_" + date +".json"
 
   if not isfile(daily_cache_file):
     url_states = "https://covidtracking.com/api/v1/states/daily.json"
@@ -23,87 +25,93 @@ def index():
     r_us = requests.get(url = url_us)
     filter_data(r_states.json(), r_us.json(), daily_cache_file)
 
-  vis_data = json.load(open(daily_cache_file, 'r'))
-  topo_json, county_df = load_county_data()
+  vis_data = json.load(open(daily_cache_file, "r"))
+  topo_json, ga_county_json = load_county_data()
   return render_template("index.html",
                          vis_data=vis_data,
+                         county_json=ga_county_json,
                          topo_json=topo_json)
 
 
 
-def filter_data(state_data, us_data, daily_cache_file ):
-  data = { 'pos_plot':[]}
+def filter_data(state_data, us_data, daily_cache_file):
+  data = { "pos_plot":[]}
   # Run GA Data
   cols = state_data[0].keys()
   df = pd.DataFrame(state_data, columns=cols)
-  ga_df = df[ df['state'] == 'GA' ]
-  ga_df_subset = ga_df[ ['date', 'positive', 'negative', 'totalTestResults', 'hospitalized', 'death'] ]
+  ga_df = df[ df["state"] == "GA" ]
+  ga_df_subset = ga_df[ ["date", "positive", "negative", "totalTestResults", "hospitalized", "death"] ]
 
   # Run US data
   us_cols = us_data[0].keys()
   us_df = pd.DataFrame(us_data, columns=us_cols)
-  us_df_subset = us_df[ ['date', 'positive', 'negative', 'totalTestResults', 'hospitalized', 'death'] ]
-  us_df_subset.rename(columns = {'positive':'positive_us',
-                       'negative':'negative_us',
-                       'totalTestResults':'totalTestResults_us',
-                       'hospitalized':'hospitalized_us',
-                       'death':'death_us' },
+  us_df_subset = us_df[ ["date", "positive", "negative", "totalTestResults", "hospitalized", "death"] ]
+  us_df_subset.rename(columns = {"positive":"positive_us",
+                       "negative":"negative_us",
+                       "totalTestResults":"totalTestResults_us",
+                       "hospitalized":"hospitalized_us",
+                       "death":"death_us" },
                       inplace=True)
-  merged_df = us_df_subset.merge(ga_df_subset, on='date')
+  merged_df = us_df_subset.merge(ga_df_subset, on="date")
 
   # Calculate differences
   us_positive_diff = np.zeros(merged_df.shape[0],)
   ga_positive_diff = np.zeros(merged_df.shape[0],)
   # We will be off by one in length, skip that last one.
-  us_positive_diff[:-1] = np.absolute(np.diff(merged_df['positive_us'].to_numpy()))
-  ga_positive_diff[:-1] = np.absolute(np.diff(merged_df['positive'].to_numpy()))
-  merged_df['positive_diff_us'] = us_positive_diff
-  merged_df['positive_diff'] = ga_positive_diff
+  us_positive_diff[:-1] = np.absolute(np.diff(merged_df["positive_us"].to_numpy()))
+  ga_positive_diff[:-1] = np.absolute(np.diff(merged_df["positive"].to_numpy()))
+  merged_df["positive_diff_us"] = us_positive_diff
+  merged_df["positive_diff"] = ga_positive_diff
 
   # Calculate rolling averages
-  merged_df['positive_diff_us_ma'] = merged_df['positive_diff_us'].iloc[::-1].rolling(window=3).mean().iloc[::-1]
-  merged_df['positive_diff_ma'] = merged_df['positive_diff'].iloc[::-1].rolling(window=3).mean().iloc[::-1]
+  merged_df["positive_diff_us_ma"] = merged_df["positive_diff_us"].iloc[::-1].rolling(window=3).mean().iloc[::-1]
+  merged_df["positive_diff_ma"] = merged_df["positive_diff"].iloc[::-1].rolling(window=3).mean().iloc[::-1]
 
   # Use string of NaN which we will use in JS for float NaNs
-  merged_df.fillna('NaN', inplace=True)
+  merged_df.fillna("NaN", inplace=True)
 
   # Package data into a d3-friendly version
-  final_data = {'us':[], 'ga':[]}
+  final_data = {"us":[], "ga":[]}
   for index, row in merged_df.iterrows():
-    final_data['us'].append({'date':int(row['date']),
-                             'positive':row['positive_us'],
-                             'negative':row['negative_us'],
-                             'tested':row['totalTestResults_us'],
-                             'hospitalized':row['hospitalized_us'],
-                             'death':row['death_us'],
-                             'positive_diff':row['positive_diff_us'],
-                             'positive_diff_ma':row['positive_diff_us_ma']})
+    final_data["us"].append({"date":int(row["date"]),
+                             "positive":row["positive_us"],
+                             "negative":row["negative_us"],
+                             "tested":row["totalTestResults_us"],
+                             "hospitalized":row["hospitalized_us"],
+                             "death":row["death_us"],
+                             "positive_diff":row["positive_diff_us"],
+                             "positive_diff_ma":row["positive_diff_us_ma"]})
 
-    final_data['ga'].append({'date':int(row['date']),
-                             'positive':row['positive'],
-                             'negative':row['negative'],
-                             'tested':row['totalTestResults'],
-                             'hospitalized':row['hospitalized'],
-                             'death':row['death'],
-                             'positive_diff':row['positive_diff'],
-                             'positive_diff_ma':row['positive_diff_ma']})
+    final_data["ga"].append({"date":int(row["date"]),
+                             "positive":row["positive"],
+                             "negative":row["negative"],
+                             "tested":row["totalTestResults"],
+                             "hospitalized":row["hospitalized"],
+                             "death":row["death"],
+                             "positive_diff":row["positive_diff"],
+                             "positive_diff_ma":row["positive_diff_ma"]})
 
 
   # Cache file
-  json.dump(final_data, open(daily_cache_file, 'w'))
-
-
+  json.dump(final_data, open(daily_cache_file, "w"))
 
 
 def load_county_data():
-  county_df = pd.read_csv('data/ga_county_data.csv')
-  # print(county_df)
-  # topo_json = json.load(open('data/counties-albers-10m.json'))
-  topo_json = json.load(open('data/counties-10m.json'))
-  # topo_json = json.load(open('data/raw_us.json'))
-  # print(topo_json['objects'])
+  date = str(dt.date.today())
+  daily_county_cache_file = "data/gac19_county_" + date +".json"
 
-  return topo_json, county_df
+  # Nab newest data from usafacts
+  if not isfile(daily_county_cache_file):
+    url_counties = "https://usafactsstatic.blob.core.windows.net/public/data/covid-19/covid_confirmed_usafacts.csv"
+    r_counties = requests.get(url = url_counties).content
+    df_counties = pd.read_csv(io.StringIO(r_counties.decode("utf-8")))
+    df_ga = df_counties[ df_counties["State"] == "GA" ]
+    df_ga.to_json(daily_county_cache_file, orient="records")
+  ga_county_json = json.load(open(daily_county_cache_file, "r"))
+
+  # Load county shape data
+  topo_json = json.load(open("data/maps/counties-10m.json"))
+  return topo_json, ga_county_json
 
 
 
