@@ -39,7 +39,10 @@ county_data.forEach((county, i) => {
   county_map[String(county.countyFIPS)] = county;
 });
 
-// extract max
+
+// Get dates in d3 time format for plotting slider
+let dates = Object.keys(county_map[-1] ).filter((d) => d.includes('/')).map((d) => d3.timeParse("%m/%e/%y")(d));
+// extract max positives
 let max_positive = d3.max(Object.keys( county_map[-1] ).map((key) => {
   return (key === "State" || key === "County Name" || key === "stateFIPS") ? -1000 : county_map[-1][key];
 }));
@@ -71,11 +74,16 @@ var margin = {top: 20, right:100, bottom: 40, left: 60},
 
 let colors = ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#c74c4c", "#ff9174"];
 
-function draw_series_plot(series){
+function draw_series_plot(series, append_div, height, width, margin){
   // append the svg object to the body of the page
-  var parent_div = d3.select("#plotting_div")
-    .append("div")
-      .attr("class", "plot-container")
+  var parent_div = undefined;
+  if (append_div === undefined){
+    parent_div = d3.select("#plotting_div")
+      .append("div")
+        .attr("class", "plot-container")
+  } else {
+    parent_div = append_div
+  }
 
   var svg =  parent_div.append("svg")
       .attr("width", width + margin.left + margin.right)
@@ -370,6 +378,208 @@ function format_number_commas(x) {
 }
 
 
+function draw_control_plot(series, parent_div, height, width, margin){
+  // append the svg object to the body of the page
+  var svg =  parent_div.append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+  // x format time scale with dates from US which has the earliest cases overall
+  var x_scale = d3.scaleTime()
+    .domain(d3.extent(vis_data["us"], (d) => d.date))
+    .range([ 0, width ]);
+
+  // x axis
+  var x_axis = d3.axisBottom(x_scale)
+                 .tickFormat(d3.timeFormat("%m-%d"));
+
+  svg.append("g")
+    .attr("class", "axis-light")
+    .attr("transform", "translate(0," + (height-margin.top) + ")")
+    .call(x_axis)
+    .selectAll("text")
+      .style("text-anchor", "end")
+      .attr("class", "axis-text")
+      .attr("dx", "-.8em")
+      .attr("dy", ".15em")
+      .attr("transform", "rotate(-35)");
+
+
+  // Y values Get max across all series, ooof ugly
+  let y_max = Math.max(...series.series.map((ser) => {
+    return  d3.max( ser.values, (d) => isNaN(d.value) ? -1 : +d.value );
+  }));
+
+  // Add Y axis
+  var y_scale = d3.scaleLinear()
+    .domain([0, y_max])
+    .range([ height-margin.top, 0 ]);
+
+  var y_axis = d3.axisLeft()
+    .scale(y_scale)
+    .ticks(2, "~s");
+
+  var y_axis_g = svg.append("g")
+    .attr("class", "axis-light")
+    .call(y_axis)
+
+  y_axis_g.selectAll("text")
+    .style("opacity", 0);
+
+  // Begin drawing content
+  var line = d3.line()
+    // .curve(d3.curveBasis)
+    .defined(d => !isNaN(d.value) && d.value > 0  )
+    .x( (d) => x_scale(d.date))
+    .y( (d) =>  y_scale(d.value))
+
+  var ser = svg.selectAll(".city")
+    .data(series.series)
+    .enter()
+    .append("g")
+      .attr("class", "series");
+
+  ser.append("path")
+    .attr("class", "plot-line line")
+    .attr("fill", "none")
+    .attr("stroke", (d) => colors[d.color])
+    .attr("stroke-width", 1.5)
+    .attr("stroke-dasharray", (d) => (d["stroke-dasharray"] !== undefined) ? d["stroke-dasharray"] : "solid" )
+    .attr("opacity", (d) => (d["opacity"] !== undefined) ? d["opacity"] : 1 )
+    .attr("d", (d) => line(d.values))
+
+  ser.append("text")
+    .datum((d) => {
+      return { name: d.name,
+               value: d.values[0],
+               color: d.color };
+    })
+    .attr("class", "plot-text")
+    .attr("transform", (d) =>  "translate(" + (x_scale(d.value.date)+3) + "," + y_scale(d.value.value) + ")")
+    .attr("x", 3)
+    .attr("dy", ".35em")
+    .attr("fill",(d) => colors[d.color])
+    .text((d) => d.name );
+
+
+  /////////////////////////// Mouse Hovers
+  // Mouse hover lines and events
+  var Tooltip = svg.selectAll(".tooltip")
+    .data(series.series)
+    .enter()
+    .append("g")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+
+    Tooltip.append("circle")
+      .attr("cx", 0)
+      .attr("cy", 0)
+      .attr("r", 5)
+      .attr("fill", "none")
+      .attr("stroke-width", 1)
+      .attr("stroke", (d) => colors[d.color]);
+
+    Tooltip.append("rect")
+      .attr("width", 60)
+      .attr("height", 24)
+      .attr("fill", "#241C15")
+      .attr("opacity", 0.7)
+      .attr("transform", "translate(17,-12)")
+
+    Tooltip.append("line")
+      .attr("x1", 6)
+      .attr("y1", 0)
+      .attr("x2", 16)
+      .attr("y2", 0)
+      .attr("stroke", (d) => colors[d.color]);
+
+    Tooltip.append("text")
+      .attr("transform", "translate(20,5)")
+      .attr("fill", (d) => colors[d.color])
+      .text("1887")
+
+
+    svg.append("rect")
+      .attr("class", "tooltip-date-rect")
+      .attr("width", 50)
+      .attr("height", 16)
+      .style("opacity", 0)
+      .attr("fill", "#241C15");
+
+    svg.append("text")
+      .attr("class", "tooltip-date axis-text")
+      .attr("dx", "-.8em")
+      .attr("dy", ".15em")
+      .attr("text-anchor", "end")
+      .style("opacity", 0)
+      .text("Loading");
+
+  var mouseover = (d) => {
+    Tooltip
+      .style("opacity", 1);
+    svg.select(".tooltip-date-rect")
+      .style("opacity", 1);
+    svg.select(".tooltip-date")
+      .style("opacity", 1);
+  }
+
+  var mousemove = (d,i) => {
+    // console.log(d);
+    let left_datum = d[0];
+    // Hide NaN values to stop errors in transform
+    var y_val = 0;
+    Tooltip
+      .attr("transform", (ser) => {
+        y_val = y_scale(ser.values[i].value);
+        if (!isNaN(ser.values[i].value) &&  !isNaN(y_val)) {
+          return "translate(" +x_scale(left_datum.date)+", "+y_val+")";
+        } else {
+          return "translate(" +x_scale(left_datum.date)+", 0)";
+        }
+      })
+      .style("opacity", (ser) => (isNaN(ser.values[i].value) || isNaN(y_scale(ser.values[i].value))) ? 0.0 : 1.0);
+    // Set hover label
+    Tooltip.select("text")
+      .text((ser) => ser.values[i].value.toFixed(0));
+    // Get the hover label width to change the card behind it
+    var bboxes = Tooltip.selectAll("text").nodes().map((nod) => nod.getBBox());
+    Tooltip.select("rect")
+      .attr("width", (ser, i) => bboxes[i].width+6);
+
+    svg.select(".tooltip-date-rect")
+      .attr("transform", "translate("+(x_scale(left_datum.date)-50)+","+(height-margin.top+33)+") rotate(-35)");
+    svg.select(".tooltip-date")
+      .attr("transform", "translate("+(x_scale(left_datum.date)+5)+","+(height-margin.top+8)+") rotate(-35)")
+      .text(datetime_to_str(d[0].date));
+  }
+
+  var mouseout = (d) => {
+    Tooltip
+      .style("opacity", 0)
+    svg.select(".tooltip-date-rect")
+      .style("opacity", 0);
+    svg.select(".tooltip-date")
+      .style("opacity", 0);
+  }
+
+  svg.append("g")
+    .attr("fill", "none")
+    .attr("pointer-events", "all")
+  .selectAll("rect")
+  .data(d3.pairs(series.series[0].values))
+  .join("rect")
+    .attr("x", ([a, b]) => x_scale(a.date))
+    .attr("height", (d) => height )
+    .attr("width", ([a, b]) => x_scale(a.date) - x_scale(b.date))
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseout", mouseout);
+
+}
+
 function draw_counties(us, state_prefix) {
   var width = 900,
     height = 800;
@@ -549,9 +759,19 @@ function draw_counties(us, state_prefix) {
     .text("Loading");
 
 
-
-
+  ////// Date range slider
+  let just_pos = {"title": "",
+                   "log_y":false,
+                   "series":[{"name":"Positive",
+                              "location":"ga",
+                              "color":5,
+                              "values": vis_data["ga"].map((d) => { return { "date":d.date, "value":d.positive}; }),
+                              "desc":"Positive Cases"}]}
+  draw_control_plot(just_pos, d3.select('.plot-container-full'), 100, width, margin);
 }
+
+
+
 
 /////////////////////////// Draw all the things!
 draw_header(vis_data);
@@ -624,7 +844,7 @@ full_series = [ {"title": "GA: Positive, Negative, Tested",
                             "values": vis_data["ga"].map((d) => { return { "date":d.date, "value":d.positive_diff_ma}; }),
                             "desc":"3-day Moving Average Daily change in GA pos"}]},
 ];
-full_series.forEach((ser) => draw_series_plot(ser));
+full_series.forEach((ser) => draw_series_plot(ser, undefined, height, width, margin));
 
 
 
