@@ -33,7 +33,6 @@ def index():
                          topo_json=topo_json)
 
 
-
 def filter_data(state_data, us_data, daily_cache_file):
   data = { "pos_plot":[]}
   # Run GA Data
@@ -99,15 +98,23 @@ def filter_data(state_data, us_data, daily_cache_file):
 def load_county_data():
   date = str(dt.date.today())
   daily_county_cache_file = "data/gac19_county_" + date +".json"
-
   # Nab newest data from usafacts
   if not isfile(daily_county_cache_file):
     url_counties = "https://usafactsstatic.blob.core.windows.net/public/data/covid-19/covid_confirmed_usafacts.csv"
     r_counties = requests.get(url = url_counties).content
     df_counties = pd.read_csv(io.StringIO(r_counties.decode("utf-8")))
     df_ga = df_counties[ df_counties["State"] == "GA" ]
+    ga_max_pos = df_ga.iloc[:, 4:].max(numeric_only=True)
+    new_row_dict = ga_max_pos.to_dict()
+    new_row_dict['State'] = "GA"
+    new_row_dict['stateFIPS'] = 13
+    new_row_dict['countyFIPS'] = -1
+    new_row_dict['County Name'] = "max"
+    df_ga = df_ga.append(new_row_dict, ignore_index=True)
     df_ga.to_json(daily_county_cache_file, orient="records")
-  ga_county_json = json.load(open(daily_county_cache_file, "r"))
+
+  # Load fresh json
+  ga_county_json = json.load(open(daily_county_cache_file, 'r'))
 
   # Load county shape data
   topo_json = json.load(open("data/maps/counties-10m.json"))

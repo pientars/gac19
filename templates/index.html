@@ -33,15 +33,19 @@ var county_data =  JSON.parse('{{ county_json | tojson }}');
 
 var datetime_to_str = d3.timeFormat("%m-%d");
 
-locations = ["us", "ga"];
-
 // Construct a map of countyID to dataset
 county_map = {}
 county_data.forEach((county, i) => {
   county_map[String(county.countyFIPS)] = county;
 });
 
+// extract max
+let max_positive = d3.max(Object.keys( county_map[-1] ).map((key) => {
+  return (key === "State" || key === "County Name" || key === "stateFIPS") ? -1000 : county_map[-1][key];
+}));
+
 // Turn date strings into dates
+let locations = ["us", "ga"];
 locations.forEach( function(location, i){
   vis_data[location].forEach( function(d, i){
     Object.keys(d).forEach(function(key) {
@@ -57,7 +61,7 @@ locations.forEach( function(location, i){
 
 // console.log(vis_data);
 // console.log(topo_json);
-// console.log(county_map);
+console.log(county_map);
 
 
 // set the dimensions and margins of the graph
@@ -372,7 +376,7 @@ function draw_counties(us, state_prefix) {
 
   // var county_colors = d3.scaleQuantize([1, 1000], d3.schemeBlues[9]);
   var county_colors = d3.scaleSequential()
-    .domain([0, 1000])
+    .domain([0, max_positive])
     .interpolator(d3.interpolateViridis);
   var cur_date = "4/17/20";
 
@@ -466,7 +470,6 @@ function draw_counties(us, state_prefix) {
 
   ////// legend
   let num_segs = 20,
-      max_positive = 1000,
       rect_height = Math.floor((height + margin.top)/num_segs),
       rect_width = 30;
   let legend_range = d3.range(0, max_positive, Math.floor(max_positive/num_segs)).reverse();
