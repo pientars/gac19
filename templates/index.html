@@ -38,7 +38,8 @@ county_map = {}
 county_data.forEach((county, i) => {
   county_map[String(county.countyFIPS)] = county;
 });
-
+// Set the most recent date
+var cur_date = "4/20/20";
 
 // Get dates in d3 time format for plotting slider
 let dates = Object.keys(county_map[-1] ).filter((d) => d.includes('/')).map((d) => d3.timeParse("%m/%e/%y")(d));
@@ -72,7 +73,15 @@ var margin = {top: 20, right:100, bottom: 40, left: 60},
     width = 900 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
+
+// Colors for plots
 let colors = ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#c74c4c", "#ff9174"];
+// Color scale for coutnies
+var county_colors = d3.scaleSequential()
+  .domain([0, max_positive])
+  .interpolator(d3.interpolateViridis);
+
+
 
 function draw_series_plot(series, append_div, height, width, margin){
   // append the svg object to the body of the page
@@ -501,7 +510,6 @@ function draw_control_plot(series, parent_div, height, width, margin){
       .attr("fill", (d) => colors[d.color])
       .text("1887")
 
-
     svg.append("rect")
       .attr("class", "tooltip-date-rect")
       .attr("width", 50)
@@ -517,18 +525,11 @@ function draw_control_plot(series, parent_div, height, width, margin){
       .style("opacity", 0)
       .text("Loading");
 
-  var mouseover = (d) => {
-    Tooltip
-      .style("opacity", 1);
-    svg.select(".tooltip-date-rect")
-      .style("opacity", 1);
-    svg.select(".tooltip-date")
-      .style("opacity", 1);
-  }
-
-  var mousemove = (d,i) => {
-    // console.log(d);
+  var mouseclick = (d,i) => {
     let left_datum = d[0];
+    var date_key = d3.timeFormat("%m/%e/%y")(left_datum.date);
+    cur_date = (date_key.startsWith("0")) ? date_key.substr(1).replace(" ","") : date_key.replace(" ","");
+    update_counties();
     // Hide NaN values to stop errors in transform
     var y_val = 0;
     Tooltip
@@ -550,19 +551,12 @@ function draw_control_plot(series, parent_div, height, width, margin){
       .attr("width", (ser, i) => bboxes[i].width+6);
 
     svg.select(".tooltip-date-rect")
-      .attr("transform", "translate("+(x_scale(left_datum.date)-50)+","+(height-margin.top+33)+") rotate(-35)");
+      .attr("transform", "translate("+(x_scale(left_datum.date)-50)+","+(height-margin.top+33)+") rotate(-35)")
+      .style("opacity", 1);
     svg.select(".tooltip-date")
       .attr("transform", "translate("+(x_scale(left_datum.date)+5)+","+(height-margin.top+8)+") rotate(-35)")
-      .text(datetime_to_str(d[0].date));
-  }
-
-  var mouseout = (d) => {
-    Tooltip
-      .style("opacity", 0)
-    svg.select(".tooltip-date-rect")
-      .style("opacity", 0);
-    svg.select(".tooltip-date")
-      .style("opacity", 0);
+      .text(datetime_to_str(d[0].date))
+      .style("opacity", 1);
   }
 
   svg.append("g")
@@ -574,23 +568,30 @@ function draw_control_plot(series, parent_div, height, width, margin){
     .attr("x", ([a, b]) => x_scale(a.date))
     .attr("height", (d) => height )
     .attr("width", ([a, b]) => x_scale(a.date) - x_scale(b.date))
-    .on("mouseover", mouseover)
-    .on("mousemove", mousemove)
-    .on("mouseout", mouseout);
+    .on("click", mouseclick);
+}
+
+function update_counties(){
+  var svg = d3.select('.centered-svg');
+  svg.selectAll(".county-path")
+  .data(topojson.feature(topo_json, topo_json.objects.counties).features, (d) => {return d.id})
+    .transition()
+    .duration(500)
+    .attr("fill", d => {
+      if (d.id in county_map) {
+        return county_colors(county_map[d.id][cur_date]);
+      } else {
+        return d.id.startsWith("13") ? "#DBD9D2": "#2e2c29";
+      }
+    })
 
 }
 
 function draw_counties(us, state_prefix) {
   var width = 900,
-    height = 800;
-
-  // var county_colors = d3.scaleQuantize([1, 1000], d3.schemeBlues[9]);
-  var county_colors = d3.scaleSequential()
-    .domain([0, max_positive])
-    .interpolator(d3.interpolateViridis);
-  var cur_date = "4/17/20";
-
-  projection = d3.geoAlbersUsa().scale(9000).translate([-1250,-400]);
+    height = 800,
+    projection = d3.geoAlbersUsa().scale(9000).translate([-1250,-400]);
+    // projection = d3.geoAlbersUsa()//.scale(9000).translate([-1250,-400]);
 
   var path = d3.geoPath()
       .projection(projection);
@@ -608,10 +609,11 @@ function draw_counties(us, state_prefix) {
         .style("opacity", 0);
     })
 
-  // Counties...
+  // GA Counties...
   svg.append("g")
     .selectAll("path")
-    .data(topojson.feature(us, us.objects.counties).features)
+    // .data(topojson.feature(us, us.objects.counties).features.filter((d) => d.id.startsWith('13')))
+    .data(topojson.feature(us, us.objects.counties).features, (d) => {return d.id})
       .join("path")
       .attr("fill", d => {
         if (d.id in county_map) {
@@ -620,8 +622,9 @@ function draw_counties(us, state_prefix) {
           return d.id.startsWith("13") ? "#DBD9D2": "#2e2c29";
         }
       })
+      .attr("class", "county-path")
       .attr("stroke", "#241C15")
-      .attr("d", path)
+      .attr("d", (d) => path(d.geometry))
       .on('mouseover', function(d,i) {
         // Highlight county
         d3.select(this)
@@ -670,12 +673,14 @@ function draw_counties(us, state_prefix) {
     .attr("width", 310)
     .attr("height", 30)
     .attr("fill", "#241C15")
+    .attr("pointer-events", "none")
     .style("opacity", 0.9)
 
   svg.append("text")
     .attr("class", "title-text")
     .attr("y", 10)
     .attr("dy", "0.5em")
+    .attr("pointer-events", "none")
     .text("GA Positive Daily Cases Over Time")
 
   ////// legend
