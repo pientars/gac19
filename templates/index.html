@@ -391,6 +391,7 @@ function draw_control_plot(series, parent_div, height, width, margin){
   // append the svg object to the body of the page
   var svg =  parent_div.append("svg")
       .attr("class", "centered-svg")
+      .style("cursor", "pointer")
       .attr("width", width + 3*margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -477,14 +478,14 @@ function draw_control_plot(series, parent_div, height, width, margin){
 
   /////////////////////////// Mouse Hovers
   // Mouse hover lines and events
-  var Tooltip = svg.selectAll(".tooltip")
+  var tooltip = svg.selectAll(".tooltip")
     .data(series.series)
     .enter()
     .append("g")
-    .style("opacity", 0)
+    // .style("opacity", 0)
     .attr("class", "tooltip")
 
-    Tooltip.append("circle")
+    tooltip.append("circle")
       .attr("cx", 0)
       .attr("cy", 0)
       .attr("r", 5)
@@ -492,21 +493,21 @@ function draw_control_plot(series, parent_div, height, width, margin){
       .attr("stroke-width", 1)
       .attr("stroke", (d) => colors[d.color]);
 
-    Tooltip.append("rect")
+    tooltip.append("rect")
       .attr("width", 60)
       .attr("height", 24)
       .attr("fill", "#241C15")
       .attr("opacity", 0.7)
       .attr("transform", "translate(17,-12)")
 
-    Tooltip.append("line")
+    tooltip.append("line")
       .attr("x1", 6)
       .attr("y1", 0)
       .attr("x2", 16)
       .attr("y2", 0)
       .attr("stroke", (d) => colors[d.color]);
 
-    Tooltip.append("text")
+    tooltip.append("text")
       .attr("transform", "translate(20,5)")
       .attr("fill", (d) => colors[d.color])
       .text("1887")
@@ -518,8 +519,58 @@ function draw_control_plot(series, parent_div, height, width, margin){
       .style("opacity", 0)
       .attr("fill", "#241C15");
 
+    svg.append("line")
+      .attr("class", "tooltip-vbar")
+      .attr("x1", 0)
+      .attr("y1", 0)
+      .attr("x2", 0)
+      .attr("y2", 90)
+      .attr("stroke-width", 1)
+      .attr("stroke", colors[5]);
+
     svg.append("text")
       .attr("class", "tooltip-date axis-text")
+      .attr("dx", "-.8em")
+      .attr("dy", ".15em")
+      .style("fill", colors[5])
+      .attr("text-anchor", "end")
+      .style("opacity", 1)
+      .text("04/20");
+
+    // Move it to 4/20
+    let starting_date = vis_data.ga[vis_data.ga.length-48].date,
+        y_val = y_scale(vis_data.ga[vis_data.ga.length-48].positive);
+    tooltip.attr("transform",  "translate(" +x_scale(starting_date)+", "+y_val+")");
+    svg.select(".tooltip-vbar")
+      .attr("transform", "translate("+(x_scale(starting_date))+","+0+")");
+    svg.select(".tooltip-date-rect")
+      .attr("transform", "translate("+(x_scale(starting_date)-50)+","+(height-margin.top+33)+") rotate(-35)")
+      .style("opacity", 1);
+    svg.select(".tooltip-date")
+      .attr("transform", "translate("+(x_scale(starting_date)+5)+","+(height-margin.top+8)+") rotate(-35)")
+
+
+
+    // Hover lines
+    svg.append("line")
+      .attr("class", "tooltip-prev-vbar")
+      .attr("x1", 0)
+      .attr("y1", 0)
+      .attr("x2", 0)
+      .attr("y2", 93)
+      .attr("stroke-width", 1)
+      .attr("stroke-dasharray", "3,3")
+      .attr("stroke", colors[5]);
+
+    svg.append("rect")
+      .attr("class", "tooltip-prev-date-rect")
+      .attr("width", 50)
+      .attr("height", 16)
+      .style("opacity", 0)
+      .attr("fill", "#241C15");
+
+    svg.append("text")
+      .attr("class", "tooltip-prev-date axis-text")
       .attr("dx", "-.8em")
       .attr("dy", ".15em")
       .attr("text-anchor", "end")
@@ -533,7 +584,7 @@ function draw_control_plot(series, parent_div, height, width, margin){
     update_counties();
     // Hide NaN values to stop errors in transform
     var y_val = 0;
-    Tooltip
+    tooltip
       .attr("transform", (ser) => {
         y_val = y_scale(ser.values[i].value);
         if (!isNaN(ser.values[i].value) &&  !isNaN(y_val)) {
@@ -544,13 +595,15 @@ function draw_control_plot(series, parent_div, height, width, margin){
       })
       .style("opacity", (ser) => (isNaN(ser.values[i].value) || isNaN(y_scale(ser.values[i].value))) ? 0.0 : 1.0);
     // Set hover label
-    Tooltip.select("text")
+    tooltip.select("text")
       .text((ser) => ser.values[i].value.toFixed(0));
     // Get the hover label width to change the card behind it
-    var bboxes = Tooltip.selectAll("text").nodes().map((nod) => nod.getBBox());
-    Tooltip.select("rect")
+    var bboxes = tooltip.selectAll("text").nodes().map((nod) => nod.getBBox());
+    tooltip.select("rect")
       .attr("width", (ser, i) => bboxes[i].width+6);
 
+    svg.select(".tooltip-vbar")
+      .attr("transform", "translate("+(x_scale(left_datum.date))+","+0+")");
     svg.select(".tooltip-date-rect")
       .attr("transform", "translate("+(x_scale(left_datum.date)-50)+","+(height-margin.top+33)+") rotate(-35)")
       .style("opacity", 1);
@@ -558,7 +611,49 @@ function draw_control_plot(series, parent_div, height, width, margin){
       .attr("transform", "translate("+(x_scale(left_datum.date)+5)+","+(height-margin.top+8)+") rotate(-35)")
       .text(datetime_to_str(d[0].date))
       .style("opacity", 1);
+    // hide the hover on click
+    svg.select(".tooltip-prev-vbar")
+      .style("opacity", 0);
+    svg.select(".tooltip-prev-date-rect")
+      .style("opacity", 0);
+    svg.select(".tooltip-prev-date")
+      .style("opacity", 0);
+    // change the date in the title
+    d3.select("#county-title").text("GA Positive Daily Cases Over Time on " + datetime_to_str(d[0].date))
+
   }
+
+  var mousemove_selector = (d,i) => {
+    // console.log(d);
+    let left_datum = d[0];
+    // Hide NaN values to stop errors in transform
+    svg.select(".tooltip-prev-vbar")
+      .attr("transform", "translate("+(x_scale(left_datum.date))+","+0+")");
+    svg.select(".tooltip-prev-date-rect")
+      .attr("transform", "translate("+(x_scale(left_datum.date)-50)+","+(height-margin.top+33)+") rotate(-35)");
+    svg.select(".tooltip-prev-date")
+      .attr("transform", "translate("+(x_scale(left_datum.date)+5)+","+(height-margin.top+8)+") rotate(-35)")
+      .text(datetime_to_str(d[0].date));
+  }
+
+  var mouseover_selector = (d, i) => {
+    svg.select(".tooltip-prev-vbar")
+      .style("opacity", .6);
+    svg.select(".tooltip-prev-date-rect")
+      .style("opacity", 1);
+    svg.select(".tooltip-prev-date")
+      .style("opacity", .6);
+  }
+
+  var mouseout_selector= (d, i) => {
+    svg.select(".tooltip-prev-vbar")
+      .style("opacity", 0);
+    svg.select(".tooltip-prev-date-rect")
+      .style("opacity", 0);
+    svg.select(".tooltip-prev-date")
+      .style("opacity", 0);
+  }
+
 
   svg.append("g")
     .attr("fill", "none")
@@ -569,8 +664,12 @@ function draw_control_plot(series, parent_div, height, width, margin){
     .attr("x", ([a, b]) => x_scale(a.date))
     .attr("height", (d) => height )
     .attr("width", ([a, b]) => x_scale(a.date) - x_scale(b.date))
-    .on("click", mouseclick);
+    .on("click", mouseclick)
+    .on("mousemove", mousemove_selector)
+    .on("mouseover", mouseover_selector)
+    .on("mouseout", mouseout_selector);
 }
+
 
 function update_counties(){
   var svg = d3.select('.centered-svg');
@@ -587,6 +686,7 @@ function update_counties(){
     })
 
 }
+
 
 function draw_counties(us, state_prefix) {
   var width = 900,
@@ -671,7 +771,7 @@ function draw_counties(us, state_prefix) {
 
   ////// Title
   svg.append("rect")
-    .attr("width", 310)
+    .attr("width", 400)
     .attr("height", 30)
     .attr("fill", "#241C15")
     .attr("pointer-events", "none")
@@ -679,10 +779,11 @@ function draw_counties(us, state_prefix) {
 
   svg.append("text")
     .attr("class", "title-text")
+    .attr("id", "county-title")
     .attr("y", 10)
     .attr("dy", "0.5em")
     .attr("pointer-events", "none")
-    .text("GA Positive Daily Cases Over Time")
+    .text("GA Positive Daily Cases Over Time on 04/20")
 
   ////// legend
   let num_segs = 20,
@@ -730,7 +831,7 @@ function draw_counties(us, state_prefix) {
   var tooly_cooly = svg.append("g")
     .attr("class", "map-tooltip")
     .attr("pointer-events", "none")
-    // .style("opacity", 0);
+    .style("opacity", 0);
 
   tooly_cooly.append("polygon")
     .attr("points", "0,0 21,-5 21,5")
