@@ -390,7 +390,8 @@ function format_number_commas(x) {
 function draw_control_plot(series, parent_div, height, width, margin){
   // append the svg object to the body of the page
   var svg =  parent_div.append("svg")
-      .attr("width", width + margin.left + margin.right)
+      .attr("class", "centered-svg")
+      .attr("width", width + 3*margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
     .append("g")
       .attr("transform",
