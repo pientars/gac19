@@ -63,8 +63,9 @@ def filter_data(state_data, us_data, daily_cache_file):
   merged_df["positive_diff"] = ga_positive_diff
 
   # Calculate rolling averages
-  merged_df["positive_diff_us_ma"] = merged_df["positive_diff_us"].iloc[::-1].rolling(window=3).mean().iloc[::-1]
-  merged_df["positive_diff_ma"] = merged_df["positive_diff"].iloc[::-1].rolling(window=3).mean().iloc[::-1]
+  merged_df["positive_diff_us_ma"] = merged_df["positive_diff_us"].iloc[::-1].rolling(window=7).mean().iloc[::-1]
+  merged_df["positive_diff_ma"] = merged_df["positive_diff"].iloc[::-1].rolling(window=7).mean().iloc[::-1]
+  merged_df["positive_diff_ma_fortnight"] = merged_df["positive_diff"].iloc[::-1].rolling(window=14).mean().iloc[::-1]
 
   # Use string of NaN which we will use in JS for float NaNs
   merged_df.fillna("NaN", inplace=True)
@@ -88,6 +89,7 @@ def filter_data(state_data, us_data, daily_cache_file):
                              "hospitalized":row["hospitalized"],
                              "death":row["death"],
                              "positive_diff":row["positive_diff"],
+                             "positive_diff_ma_fortnight":row["positive_diff_ma_fortnight"],
                              "positive_diff_ma":row["positive_diff_ma"]})
 
 
