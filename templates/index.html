@@ -63,9 +63,9 @@ locations.forEach( function(location, i){
   });
 });
 
-// console.log(vis_data);
+console.log(vis_data);
 // console.log(topo_json);
-console.log(county_map);
+// console.log(county_map);
 
 
 // set the dimensions and margins of the graph
@@ -76,7 +76,7 @@ var margin = {top: 20, right:100, bottom: 40, left: 60},
 
 // Colors for plots
 let colors = ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#c74c4c", "#ff9174",
-              "#ffc9bf", "#a8753e"];
+              "#ffc9bf", "#a8753e", "#eb8888"];
 // Color scale for coutnies
 var county_colors = d3.scaleSequential()
   .domain([0, max_positive])
@@ -907,6 +907,27 @@ full_series = [ {"title": "Change in Cumulative Positive Cases GA ",
                              "opacity": .8,
                              "values": vis_data["ga"].map((d) => { return { "date":d.date, "value":d.positive_diff_ma_fortnight}; }),
                              "desc":"14-day Moving Average Daily change in GA pos"}]},
+                {"title": "Change in Cumulative Deaths GA ",
+                 "log_y":false,
+                 "series":[{"name":"dDeath/dt (GA)",
+                            "location":"ga",
+                            "color":4,
+                            "values": vis_data["ga"].map((d) => { return { "date":d.date, "value":d.death_diff}; }),
+                            "desc":"Daily Deaths in GA"},
+                           {"name":"",
+                            "location":"ga",
+                            "color":4,
+                            "stroke-dasharray": "5,5",
+                            "opacity": .6,
+                            "values": vis_data["ga"].map((d) => { return { "date":d.date, "value":d.death_diff_ma}; }),
+                            "desc":"7-day Moving Average Daily change in GA Deaths"},
+                            {"name":"",
+                             "location":"ga",
+                             "color":8,
+                             "stroke-dasharray": "2,2",
+                             "opacity": .8,
+                             "values": vis_data["ga"].map((d) => { return { "date":d.date, "value":d.death_diff_ma_fortnight}; }),
+                             "desc":"14-day Moving Average Daily change in GA Deaths"}]},
                 {"title": "Change in Cumulative Positive Cases US",
                  "log_y":false,
                 "series":[{"name":"dPos/dt (US)",
