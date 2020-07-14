@@ -65,7 +65,7 @@ locations.forEach( function(location, i){
 
 // console.log(vis_data);
 // console.log(topo_json);
-// console.log(county_map);
+console.log(county_map);
 
 
 // set the dimensions and margins of the graph
@@ -690,6 +690,8 @@ function update_counties(){
 
 
 function draw_counties(us, state_prefix) {
+  console.log(us)
+
   var width = 900,
     height = 800,
     projection = d3.geoAlbersUsa().scale(9000).translate([-1250,-400]);
@@ -884,7 +886,28 @@ function draw_counties(us, state_prefix) {
 /////////////////////////// Draw all the things!
 draw_header(vis_data);
 // Here I riff on the full data to make some individual plots
-full_series = [ {"title": "GA: Positive, Negative, Tested",
+full_series = [ {"title": "Change in Cumulative Positive Cases GA ",
+                "log_y":false,
+                 "series":[{"name":"dPos/dt (GA)",
+                            "location":"ga",
+                            "color":5,
+                            "values": vis_data["ga"].map((d) => { return { "date":d.date, "value":d.positive_diff}; }),
+                            "desc":"Daily change in GA positive cases"},
+                           {"name":"",
+                            "location":"ga",
+                            "color":7,
+                            "stroke-dasharray": "5,5",
+                            "opacity": .6,
+                            "values": vis_data["ga"].map((d) => { return { "date":d.date, "value":d.positive_diff_ma}; }),
+                            "desc":"7-day Moving Average Daily change in GA pos"},
+                            {"name":"",
+                             "location":"ga",
+                             "color":6,
+                             "stroke-dasharray": "2,2",
+                             "opacity": .8,
+                             "values": vis_data["ga"].map((d) => { return { "date":d.date, "value":d.positive_diff_ma_fortnight}; }),
+                             "desc":"14-day Moving Average Daily change in GA pos"}]},
+                {"title": "GA: Positive, Negative, Tested",
                  "log_y":false,
                  "series":[{"name":"Positive",
                             "location":"ga",
@@ -901,27 +924,7 @@ full_series = [ {"title": "GA: Positive, Negative, Tested",
                            "color":2,
                            "values": vis_data["ga"].map((d) => { return { "date":d.date, "value":d.tested}; }),
                            "desc":"People Tested"}]},
-               {"title": "Change in Cumulative Positive Cases GA ",
-               "log_y":false,
-                "series":[{"name":"dPos/dt (GA)",
-                           "location":"ga",
-                           "color":5,
-                           "values": vis_data["ga"].map((d) => { return { "date":d.date, "value":d.positive_diff}; }),
-                           "desc":"Daily change in GA positive cases"},
-                          {"name":"",
-                           "location":"ga",
-                           "color":7,
-                           "stroke-dasharray": "5,5",
-                           "opacity": .6,
-                           "values": vis_data["ga"].map((d) => { return { "date":d.date, "value":d.positive_diff_ma}; }),
-                           "desc":"7-day Moving Average Daily change in GA pos"},
-                           {"name":"",
-                            "location":"ga",
-                            "color":6,
-                            "stroke-dasharray": "2,2",
-                            "opacity": .8,
-                            "values": vis_data["ga"].map((d) => { return { "date":d.date, "value":d.positive_diff_ma_fortnight}; }),
-                            "desc":"14-day Moving Average Daily change in GA pos"}]},
+
                 {"title": "US Positive, GA Positive ",
                 "log_y":false,
                  "series":[{"name":"Positive (US)",
