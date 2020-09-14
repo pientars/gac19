@@ -57,13 +57,19 @@ def filter_data(state_data, us_data, daily_cache_file):
   us_positive_diff = np.zeros(merged_df.shape[0],)
   ga_positive_diff = np.zeros(merged_df.shape[0],)
   ga_death_diff = np.zeros(merged_df.shape[0],)
+  ga_hosp_diff = np.zeros(merged_df.shape[0],)
+  ga_test_diff = np.zeros(merged_df.shape[0],)
   # We will be off by one in length, skip that last one.
   us_positive_diff[:-1] = np.absolute(np.diff(merged_df["positive_us"].to_numpy()))
   ga_positive_diff[:-1] = np.absolute(np.diff(merged_df["positive"].to_numpy()))
   ga_death_diff[:-1] = np.absolute(np.diff(merged_df["death"].to_numpy()))
+  ga_hosp_diff[:-1] = np.absolute(np.diff(merged_df["hospitalized"].to_numpy()))
+  ga_test_diff[:-1] = np.absolute(np.diff(merged_df["totalTestResults"].to_numpy()))
   merged_df["positive_diff_us"] = us_positive_diff
   merged_df["positive_diff"] = ga_positive_diff
   merged_df["death_diff"] = ga_death_diff
+  merged_df["hospitalized_diff"] = ga_hosp_diff
+  merged_df["tested_diff"] = ga_test_diff
 
   # Calculate rolling averages
   merged_df["positive_diff_us_ma"] = merged_df["positive_diff_us"].iloc[::-1].rolling(window=7).mean().iloc[::-1]
@@ -71,7 +77,10 @@ def filter_data(state_data, us_data, daily_cache_file):
   merged_df["positive_diff_ma_fortnight"] = merged_df["positive_diff"].iloc[::-1].rolling(window=14).mean().iloc[::-1]
   merged_df["death_diff_ma"] = merged_df["death_diff"].iloc[::-1].rolling(window=7).mean().iloc[::-1]
   merged_df["death_diff_ma_fortnight"] = merged_df["death_diff"].iloc[::-1].rolling(window=14).mean().iloc[::-1]
-
+  merged_df["hospitalized_diff_ma"] = merged_df["hospitalized_diff"].iloc[::-1].rolling(window=7).mean().iloc[::-1]
+  merged_df["hospitalized_diff_ma_fortnight"] = merged_df["hospitalized_diff"].iloc[::-1].rolling(window=14).mean().iloc[::-1]
+  merged_df["tested_diff_ma"] = merged_df["tested_diff"].iloc[::-1].rolling(window=7).mean().iloc[::-1]
+  merged_df["tested_diff_ma_fortnight"] = merged_df["tested_diff"].iloc[::-1].rolling(window=14).mean().iloc[::-1]
   # Use string of NaN which we will use in JS for float NaNs
   merged_df.fillna("NaN", inplace=True)
 
@@ -98,7 +107,14 @@ def filter_data(state_data, us_data, daily_cache_file):
                              "positive_diff_ma":row["positive_diff_ma"],
                              "death_diff":row["death_diff"],
                              "death_diff_ma_fortnight":row["death_diff_ma_fortnight"],
-                             "death_diff_ma":row["death_diff_ma"]})
+                             "death_diff_ma":row["death_diff_ma"],
+                             "hospitalized_diff":row["hospitalized_diff"],
+                             "hospitalized_diff_ma_fortnight":row["hospitalized_diff_ma_fortnight"],
+                             "hospitalized_diff_ma":row["hospitalized_diff_ma"],
+                             "tested_diff":row["tested_diff"],
+                             "tested_diff_ma_fortnight":row["tested_diff_ma_fortnight"],
+                             "tested_diff_ma":row["tested_diff_ma"]
+                             })
 
   # Cache file
   json.dump(final_data, open(daily_cache_file, "w"))
