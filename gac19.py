@@ -53,6 +53,7 @@ def filter_data(state_data, us_data, daily_cache_file):
                       inplace=True)
   merged_df = us_df_subset.merge(ga_df_subset, on="date")
 
+
   # Calculate differences
   us_positive_diff = np.zeros(merged_df.shape[0],)
   ga_positive_diff = np.zeros(merged_df.shape[0],)
@@ -63,6 +64,10 @@ def filter_data(state_data, us_data, daily_cache_file):
   us_positive_diff[:-1] = np.absolute(np.diff(merged_df["positive_us"].to_numpy()))
   ga_positive_diff[:-1] = np.absolute(np.diff(merged_df["positive"].to_numpy()))
   ga_death_diff[:-1] = np.absolute(np.diff(merged_df["death"].to_numpy()))
+  # Remove anomalylous garbage death days
+  vf = np.vectorize(lambda x: x if x < 200 else x/100.0)
+  ga_death_diff = vf(ga_death_diff)
+
   ga_hosp_diff[:-1] = np.absolute(np.diff(merged_df["hospitalized"].to_numpy()))
   ga_test_diff[:-1] = np.absolute(np.diff(merged_df["totalTestResults"].to_numpy()))
   merged_df["positive_diff_us"] = us_positive_diff
